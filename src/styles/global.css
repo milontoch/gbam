@@ -622,6 +622,7 @@ a.card:hover {
 
 .prose {
 	max-width: 42rem;
+	overflow-wrap: anywhere; /* long links must wrap instead of pushing the page sideways */
 }
 
 .related {
