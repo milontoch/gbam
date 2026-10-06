@@ -1,0 +1,48 @@
+---
+import Page from '../layouts/Page.astro';
+import { liveTools } from '../data/tools';
+import { site } from '../data/site';
+
+const tools = liveTools();
+---
+
+<Page
+	title="About Gbam – Free, Private Online Tools"
+	description="Gbam offers free tools for PDFs, photos, invoices and CVs that run in your browser, so your files never leave your device."
+	heading="About Gbam"
+>
+	<p>
+		Gbam is a collection of free online tools for everyday jobs: merging a PDF for a job portal, shrinking a photo so it
+		uploads on a slow connection, making an invoice for a customer, or getting a passport photo ready for an application.
+	</p>
+
+	<h2>Why we built it</h2>
+	<p>
+		Many free tools online ask you to upload your files to a server you know nothing about. That is a real worry when the
+		file is a certificate, an ID card or a bank detail. They can also be slow and heavy on mobile data.
+	</p>
+	<p>
+		Gbam works differently. Our tools run <strong>inside your own browser</strong>, on your own phone or computer. Your
+		documents and photos are not uploaded to us, so we never see them. It is also light on data, because the pages are
+		small and each tool loads only what it needs.
+	</p>
+
+	<h2>What you can do here</h2>
+	<ul>
+		{tools.map((t) => <li><a href={`/${t.slug}`}>{t.name}</a>: {t.summary}</li>)}
+	</ul>
+	<p>We are adding more tools over time, including calculators and helpers for everyday work.</p>
+
+	<h2>Our promises</h2>
+	<ul>
+		<li><strong>Private by design.</strong> Your files stay on your device. Read the details on our <a href="/privacy">Privacy page</a>.</li>
+		<li><strong>Free to use.</strong> No account, no sign-up. The site may show ads in future to cover its costs.</li>
+		<li><strong>Honest about limits.</strong> If a tool cannot do something well, we say so on the page instead of pretending.</li>
+	</ul>
+
+	<h2>Who runs Gbam</h2>
+	<p>
+		Gbam is built and run by an independent developer in {site.country}. If something is broken, confusing or missing,
+		please tell us on the <a href="/contact">Contact page</a>. We read every message.
+	</p>
+</Page>

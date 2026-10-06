@@ -1,0 +1,33 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page
+	title="Contact Gbam"
+	description="Contact Gbam to report a problem, ask a question or suggest a new tool."
+	heading="Contact us"
+>
+	<p>We would like to hear from you, whether something is broken or you have an idea for a new tool.</p>
+
+	<p>
+		Email us at <a href={`mailto:${site.email}`}>{site.email}</a>.
+	</p>
+
+	<h2>Reporting a problem</h2>
+	<p>It helps us fix things faster if you tell us:</p>
+	<ul>
+		<li>which tool you were using,</li>
+		<li>what you expected and what happened instead,</li>
+		<li>your phone or computer and browser (for example "Tecno phone, Chrome").</li>
+	</ul>
+	<p>
+		<strong>Please do not send us your private documents or photos.</strong> Gbam never needs them. A description or a
+		screenshot of the problem is enough.
+	</p>
+
+	<h2>Suggest a tool</h2>
+	<p>Tell us what you wish existed and why. Ideas from real everyday needs go to the top of our list.</p>
+
+	<p class="muted">We read every message and reply as soon as we can. We may not be able to answer every request.</p>
+</Page>

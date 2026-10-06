@@ -1,0 +1,23 @@
+---
+// Layout for plain text pages: About, Privacy, Terms, Contact, Licences.
+import Base from './Base.astro';
+
+interface Props {
+	title: string; // <title>
+	description: string;
+	heading: string;
+	updated?: string; // shown as "Last updated"
+}
+
+const { title, description, heading, updated } = Astro.props;
+---
+
+<Base title={title} description={description}>
+	<div class="container">
+		<article class="prose page">
+			<h1>{heading}</h1>
+			{updated && <p class="muted">Last updated: {updated}</p>}
+			<slot />
+		</article>
+	</div>
+</Base>

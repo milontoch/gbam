@@ -1,0 +1,64 @@
+---
+import Page from '../layouts/Page.astro';
+
+const items = [
+	{
+		name: 'Astro',
+		use: 'The framework that builds this website.',
+		licence: 'MIT License',
+		url: 'https://github.com/withastro/astro',
+	},
+	{
+		name: 'pdf-lib',
+		use: 'Merging and splitting PDF files in your browser.',
+		licence: 'MIT License',
+		url: 'https://github.com/Hopding/pdf-lib',
+	},
+	{
+		name: 'fflate',
+		use: 'Creating ZIP files in your browser.',
+		licence: 'MIT License',
+		url: 'https://github.com/101arrowz/fflate',
+	},
+	{
+		name: 'ONNX Runtime Web',
+		use: 'Running the AI background tool in your browser.',
+		licence: 'MIT License',
+		url: 'https://github.com/microsoft/onnxruntime',
+	},
+	{
+		name: 'MODNet',
+		use: 'The AI model that finds a person in a photo. Original research and model by Zhanghan Ke and colleagues. The browser-ready ONNX version is published by Xenova (Hugging Face).',
+		licence: 'Apache License 2.0',
+		url: 'https://github.com/ZHKKKe/MODNet',
+	},
+];
+---
+
+<Page
+	title="Open-source Licences | Gbam"
+	description="The open-source software and AI model that Gbam is built with, and their licences."
+	heading="Open-source licences"
+>
+	<p>
+		Gbam is built with the help of free, open-source software. We are grateful to the people who made it. Here is what we
+		use and under which licence.
+	</p>
+
+	<ul>
+		{
+			items.map((i) => (
+				<li>
+					<strong><a href={i.url}>{i.name}</a></strong>: {i.use} Licence: {i.licence}.
+				</li>
+			))
+		}
+	</ul>
+
+	<p>
+		The MIT License and the Apache License 2.0 allow free use, including commercial use. Full licence texts are at
+		<a href="https://opensource.org/license/mit">opensource.org/license/mit</a> and
+		<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>. The AI model file on our
+		site is unmodified apart from the quantisation (shrinking) done by its publisher.
+	</p>
+</Page>

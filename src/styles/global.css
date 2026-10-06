@@ -713,3 +713,15 @@ progress {
 	accent-color: var(--brand);
 	margin-top: 0.5rem;
 }
+
+.page {
+	padding: 1.5rem 0 0;
+}
+
+.page ul {
+	padding-left: 1.25rem;
+}
+
+.page li {
+	margin-bottom: 0.4rem;
+}

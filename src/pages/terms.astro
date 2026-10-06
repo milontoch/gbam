@@ -1,0 +1,87 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page
+	title="Terms of Use | Gbam"
+	description="The rules for using Gbam's free online tools, including what we promise and what we cannot guarantee."
+	heading="Terms of Use"
+	updated={site.updated}
+>
+	<p>
+		By using Gbam you agree to these terms. If you do not agree, please do not use the site. We have kept them in plain
+		language.
+	</p>
+
+	<h2>What Gbam is</h2>
+	<p>
+		Gbam provides free online tools that work in your browser, such as tools for PDFs, photos, invoices and CVs. We may
+		add, change or remove tools at any time.
+	</p>
+
+	<h2>Your files and content</h2>
+	<p>
+		Your files, photos and the information you type remain yours. Because the tools run in your browser, they are not
+		uploaded to us. You are responsible for having the right to use any file or photo you put into a tool.
+	</p>
+
+	<h2>Using the tools properly</h2>
+	<p>You agree not to:</p>
+	<ul>
+		<li>use Gbam for anything illegal, or to create false or misleading documents meant to deceive others;</li>
+		<li>try to break, overload or gain unauthorised access to the site;</li>
+		<li>copy or resell the site itself as your own.</li>
+	</ul>
+
+	<h2>No guarantee of results</h2>
+	<p>
+		We work hard to make the tools accurate, but they are provided "as is" and "as available", without promises of any
+		kind. Results can be wrong or fail, especially with unusual or very large files. Always check your result before you
+		rely on it.
+	</p>
+	<ul>
+		<li>
+			<strong>Passport and ID photos:</strong> Gbam sizes and edits photos, but we cannot guarantee that any office,
+			embassy or website will accept them. Read the official rules for your application.
+		</li>
+		<li>
+			<strong>Invoices and receipts:</strong> Gbam produces a document layout and does simple arithmetic. It is not
+			accounting, tax or legal advice, and we do not promise that a document meets the rules of any tax authority.
+		</li>
+		<li>
+			<strong>CVs:</strong> Gbam formats what you type. We do not promise any job or interview.
+		</li>
+	</ul>
+
+	<h2>Limit of our responsibility</h2>
+	<p>
+		To the fullest extent the law allows, Gbam and the person who runs it are not responsible for any loss or damage
+		that results from using the site, including lost files, rejected applications, lost business or lost data. Nothing
+		in these terms limits any right you have by law that cannot be limited.
+	</p>
+
+	<h2>Ownership of the site</h2>
+	<p>
+		The Gbam name, design and our own text and code belong to us. The site also uses open-source software that belongs
+		to its authors and is used under its own licence. See our <a href="/licenses">Licences page</a>.
+	</p>
+
+	<h2>Ads and links</h2>
+	<p>
+		Gbam may show ads and may link to other websites. We do not control those sites or advertisers and are not
+		responsible for them.
+	</p>
+
+	<h2>Changes</h2>
+	<p>
+		We may update these terms. The date at the top shows the latest version. If you keep using Gbam after a change, you
+		accept the new terms.
+	</p>
+
+	<h2>Governing law</h2>
+	<p>These terms are governed by the laws of the Federal Republic of {site.country}.</p>
+
+	<h2>Contact</h2>
+	<p>Questions about these terms? Email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+</Page>

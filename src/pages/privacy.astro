@@ -1,0 +1,102 @@
+---
+import Page from '../layouts/Page.astro';
+import { site } from '../data/site';
+---
+
+<Page
+	title="Privacy Policy | Gbam"
+	description="How Gbam handles your data. Your files are processed in your browser and are never uploaded to us."
+	heading="Privacy Policy"
+	updated={site.updated}
+>
+	<p>This page explains what happens to your information when you use Gbam. We have tried to keep it clear and short.</p>
+
+	<h2>The short version</h2>
+	<ul>
+		<li>The tools run in your browser. <strong>Your files are not uploaded to Gbam.</strong></li>
+		<li>We do not ask you to create an account, and we do not ask for your name or phone number to use the tools.</li>
+		<li>What you type into a tool, such as an invoice or CV, is not sent to us or stored by us.</li>
+		<li>Gbam does not set its own cookies. If ads are shown, advertising partners may use cookies (see "Advertising").</li>
+	</ul>
+
+	<h2>Your files and what you type</h2>
+	<p>
+		When you choose a file or type into a form on a Gbam tool (a PDF, a photo, an invoice or CV), the work is done by
+		your own browser on your own device. The file and the text stay in your device's memory, and they disappear when you
+		close or refresh the page. We do not receive them, we cannot see them, and we do not keep copies.
+	</p>
+	<p>
+		The AI background tool on the passport photo page needs a model file to work. Your browser downloads that file from
+		our own website once and keeps it. Your photo is not sent anywhere while the model runs.
+	</p>
+
+	<h2>Information we and our hosting provider receive</h2>
+	<p>
+		Like every website, when you visit Gbam your browser makes a request to our hosting provider, Cloudflare. This
+		normally includes your IP address, the page you asked for, the date and time, and technical details such as your
+		browser type. This is needed to deliver the page and keep the site secure.
+	</p>
+	<p>
+		We also use or plan to use privacy-friendly analytics from Cloudflare (Cloudflare Web Analytics) to count visits and
+		see which pages are popular. According to Cloudflare, it does not use cookies and does not track you across other
+		websites. You can read more at <a href="https://www.cloudflare.com/web-analytics/">cloudflare.com/web-analytics</a>.
+	</p>
+
+	<h2>Cookies and similar technologies</h2>
+	<p>
+		Gbam itself does not set cookies and does not store data in your browser's local storage to track you. Your browser
+		may keep downloaded site files (including the AI model file) in its cache so pages load faster. You can clear that
+		in your browser settings at any time.
+	</p>
+
+	<h2>Advertising</h2>
+	<p>
+		Gbam may show ads provided by Google AdSense or other advertising partners to help pay for the site. If ads are
+		shown, these partners may use cookies or similar technology to show ads based on your visits to this and other
+		websites. Google's use of advertising cookies lets it and its partners show ads based on your visit to Gbam and
+		other sites on the internet.
+	</p>
+	<ul>
+		<li>You can manage or turn off personalised ads in <a href="https://adssettings.google.com/">Google Ads Settings</a>.</li>
+		<li>
+			You can also opt out of many third-party ad vendors at <a href="https://www.aboutads.info/choices/">aboutads.info/choices</a>.
+		</li>
+		<li>
+			To learn how Google uses data from sites that use its services, see
+			<a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>.
+		</li>
+	</ul>
+	<p>Where the law requires it, we will ask for your consent before showing personalised ads.</p>
+
+	<h2>If you contact us</h2>
+	<p>
+		If you email us, we receive your email address and the message you send. We use them only to reply to you and to
+		improve Gbam. We keep messages only as long as we need them. Please do not email us private documents or photos.
+	</p>
+
+	<h2>Links to other websites</h2>
+	<p>
+		Gbam may link to other websites. We are not responsible for their content or privacy practices, so please read their
+		policies.
+	</p>
+
+	<h2>Children</h2>
+	<p>Gbam is not aimed at children under 13, and we do not knowingly collect personal information from them.</p>
+
+	<h2>Your rights</h2>
+	<p>
+		Depending on where you live, such as under the Nigeria Data Protection Act 2023 or the EU and UK GDPR, you may have
+		the right to ask what personal data we hold about you, to correct it, or to ask us to delete it. Because Gbam does
+		not collect your files or an account profile, there is usually little to share, but if you want to ask, email us at
+		<a href={`mailto:${site.email}`}>{site.email}</a>.
+	</p>
+
+	<h2>Changes to this policy</h2>
+	<p>
+		We may update this page as Gbam changes, for example when we add new tools or start showing ads. The date at the top
+		shows when it was last changed.
+	</p>
+
+	<h2>Contact</h2>
+	<p>Questions about privacy? Email <a href={`mailto:${site.email}`}>{site.email}</a> or visit our <a href="/contact">Contact page</a>.</p>
+</Page>
