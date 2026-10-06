@@ -72,6 +72,11 @@ export function printAs(title: string) {
 	window.print();
 }
 
+// File names come from the user's own files. Strip path and control characters before reusing them in downloads.
+export function safeFilename(name: string): string {
+	return name.replace(/[\\/:*?"<>|\u0000-\u001f]+/g, '_').replace(/^\.+/, '').slice(0, 120);
+}
+
 export function baseName(filename: string, fallback = 'file') {
-	return filename.replace(/\.[^.]+$/, '') || fallback;
+	return safeFilename(filename.replace(/\.[^.]+$/, '')).trim() || fallback;
 }

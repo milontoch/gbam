@@ -1,6 +1,7 @@
 import { bindDropzone } from './dropzone';
 import { formatBytes } from './format';
 import { decodeImage } from './image-load';
+import { baseName, safeFilename } from './ui';
 
 const MAX_FILES = 20;
 const MAX_PIXELS = 60_000_000; // 60 megapixels; bigger can crash phones
@@ -62,7 +63,7 @@ async function compressOne(file: File, type: string, q: number, maxW: number) {
 }
 
 function outputName(name: string, type: string) {
-	const base = name.replace(/\.[^.]+$/, '') || 'image';
+	const base = baseName(name, 'image');
 	return `${base}-compressed.${type === 'image/webp' ? 'webp' : 'jpg'}`;
 }
 
@@ -126,7 +127,7 @@ async function run() {
 				: `${formatBytes(file.size)} → ${formatBytes(blob.size)} (${Math.max(0, Math.round((1 - blob.size / file.size) * 100))}% smaller)`;
 			addRow(file.name, detail, false, {
 				url,
-				filename: keepOriginal ? file.name : outputName(file.name, type),
+				filename: keepOriginal ? safeFilename(file.name) || 'image' : outputName(file.name, type),
 			});
 		} catch (err) {
 			addRow(file.name, err instanceof Error ? err.message : 'Something went wrong.', true);

@@ -1,6 +1,6 @@
 // Runs the browser tests against the built site.
 //   npm run test:e2e                 everything except the slow-network test
-//   npm run test:e2e -- --only=pdf   one suite (pages, images, pdf, docs, passport, slow)
+//   npm run test:e2e -- --only=pdf   one suite (pages, images, pdf, docs, passport, security, slow)
 //   npm run test:e2e -- --slow       also run the slow-network suite (adds a minute or two)
 import { spawn } from 'node:child_process';
 import { launch, Report, BASE } from './lib.mjs';
@@ -8,7 +8,7 @@ import { launch, Report, BASE } from './lib.mjs';
 const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith('--only='))?.slice(7);
 const withSlow = args.includes('--slow') || only === 'slow';
-const suites = ['pages', 'images', 'pdf', 'docs', 'passport', ...(withSlow ? ['slow'] : [])].filter((s) => !only || s === only);
+const suites = ['pages', 'images', 'pdf', 'docs', 'passport', 'security', ...(withSlow ? ['slow'] : [])].filter((s) => !only || s === only);
 
 const port = new URL(BASE).port || '4399';
 const server = spawn('npx', ['astro', 'preview', '--port', port], { stdio: 'ignore' });

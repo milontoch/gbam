@@ -1,0 +1,9 @@
+# GitHub (free) checks our dependencies weekly and opens a pull request when an update or
+# security fix is available. Review it, let the tests pass, then merge.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
