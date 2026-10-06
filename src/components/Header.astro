@@ -1,0 +1,51 @@
+---
+import { liveTools } from '../data/tools';
+import { cleanPath } from '../utils/path';
+
+const path = cleanPath(Astro.url.pathname);
+const tools = liveTools();
+---
+
+<header class="site-header">
+	<div class="container">
+		<div class="header-row">
+			<a class="logo" href="/">Gbam</a>
+			<button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+				Menu
+			</button>
+		</div>
+		<nav class="site-nav" id="site-nav" aria-label="Main">
+			<ul>
+				<li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a></li>
+			</ul>
+			{tools.length > 0 && <p class="nav-heading">Tools</p>}
+			<ul>
+				{
+					tools.map((t) => (
+						<li>
+							<a href={`/${t.slug}`} aria-current={path === `/${t.slug}` ? 'page' : undefined}>
+								{t.name}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<p class="nav-heading">Gbam</p>
+			<ul>
+				<li><a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a></li>
+				<li><a href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<script>
+	const button = document.getElementById('menu-button');
+	const nav = document.getElementById('site-nav');
+	if (button && nav) {
+		button.addEventListener('click', () => {
+			const open = nav.classList.toggle('open');
+			button.setAttribute('aria-expanded', String(open));
+		});
+	}
+</script>

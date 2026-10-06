@@ -1,17 +1,42 @@
 ---
-
+import Base from '../layouts/Base.astro';
+import ToolCard from '../components/ToolCard.astro';
+import PrivacyBadge from '../components/PrivacyBadge.astro';
+import { tools } from '../data/tools';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+	title="Gbam – Free Online Tools That Keep Your Files Private"
+	description="Free tools for PDFs, images, invoices and CVs. Everything runs in your browser, so your files never leave your device."
+>
+	<div class="container">
+		<section class="hero">
+			<h1>Free tools that keep your files private</h1>
+			<p>Merge PDFs, shrink photos, make invoices and CVs. No sign-up, no uploads, and light on data.</p>
+		</section>
+
+		<PrivacyBadge />
+
+		<section id="tools">
+			<h2>All tools</h2>
+			<ul class="grid">
+				{
+					tools.map((t) => (
+						<li>
+							<ToolCard tool={t} />
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class="prose">
+			<h2>Why Gbam?</h2>
+			<p>
+				Most free online tools upload your files to a server you know nothing about. Gbam does the work inside your
+				own browser, so your documents, photos and details stay on your phone or computer.
+			</p>
+			<p>It is free to use, needs no account, and is built to stay fast on slow connections.</p>
+		</section>
+	</div>
+</Base>

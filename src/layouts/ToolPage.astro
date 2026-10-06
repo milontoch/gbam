@@ -1,0 +1,98 @@
+---
+// The reusable tool-page template. Every tool page uses this, so every tool
+// gets the same heading, privacy message, how-to steps, FAQ, related tools and structured data.
+import Base from './Base.astro';
+import PrivacyBadge from '../components/PrivacyBadge.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getTool, liveTools } from '../data/tools';
+
+interface Props {
+	slug: string;
+	intro: string; // 1 to 2 sentences under the heading
+	steps: string[]; // "How to use" list
+	faq: { q: string; a: string }[];
+}
+
+const { slug, intro, steps, faq } = Astro.props;
+const tool = getTool(slug);
+const related = liveTools()
+	.filter((t) => t.slug !== slug)
+	.slice(0, 4);
+
+const url = new URL(`/${slug}`, Astro.site).href;
+const app = {
+	'@context': 'https://schema.org',
+	'@type': 'WebApplication',
+	name: tool.h1,
+	url,
+	description: tool.metaDescription,
+	applicationCategory: 'UtilitiesApplication',
+	operatingSystem: 'Any (runs in a web browser)',
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+const faqLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faq.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: { '@type': 'Answer', text: f.a },
+	})),
+};
+// Escape "<" so the JSON can never close the script tag early.
+const ld = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
+---
+
+<Base title={tool.metaTitle} description={tool.metaDescription}>
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={ld(app)}></script>
+		<script type="application/ld+json" set:html={ld(faqLd)}></script>
+	</Fragment>
+
+	<div class="container">
+		<div class="tool-head">
+			<h1>{tool.h1}</h1>
+			<p>{intro}</p>
+		</div>
+
+		<PrivacyBadge />
+
+		<div class="tool-box">
+			<slot />
+		</div>
+
+		<section class="prose">
+			<h2>How to use</h2>
+			<ol class="steps">
+				{steps.map((s) => <li>{s}</li>)}
+			</ol>
+		</section>
+
+		<section class="prose faq">
+			<h2>Frequently asked questions</h2>
+			{
+				faq.map((f) => (
+					<details>
+						<summary>{f.q}</summary>
+						<p>{f.a}</p>
+					</details>
+				))
+			}
+		</section>
+
+		{
+			related.length > 0 && (
+				<section class="related">
+					<h2>More free tools</h2>
+					<ul class="grid">
+						{related.map((t) => (
+							<li>
+								<ToolCard tool={t} />
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
+	</div>
+</Base>

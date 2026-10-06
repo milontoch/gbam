@@ -1,0 +1,31 @@
+---
+import type { Tool } from '../data/tools';
+
+interface Props {
+	tool: Tool;
+}
+
+const { tool } = Astro.props;
+---
+
+{
+	tool.live ? (
+		<a class="card" href={`/${tool.slug}`}>
+			<span class="tile" aria-hidden="true">{tool.badge}</span>
+			<span>
+				<h3>{tool.name}</h3>
+				<p>{tool.summary}</p>
+			</span>
+		</a>
+	) : (
+		<div class="card card-soon">
+			<span class="tile" aria-hidden="true">{tool.badge}</span>
+			<span>
+				<h3>
+					{tool.name} <span class="pill">Soon</span>
+				</h3>
+				<p>{tool.summary}</p>
+			</span>
+		</div>
+	)
+}
