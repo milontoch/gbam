@@ -5,7 +5,8 @@ export const BASE = process.env.BASE_URL || 'http://localhost:4399';
 export const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 export async function launch() {
-	return chromium.launch({ executablePath: CHROME });
+	// On GitHub's servers Chrome needs --no-sandbox; on your own computer the normal sandbox is kept.
+	return chromium.launch({ executablePath: CHROME, args: process.env.CI ? ['--no-sandbox'] : [] });
 }
 
 export class Report {
