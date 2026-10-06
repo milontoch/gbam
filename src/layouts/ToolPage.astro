@@ -39,6 +39,14 @@ const faqLd = {
 		acceptedAnswer: { '@type': 'Answer', text: f.a },
 	})),
 };
+const breadcrumbs = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Gbam', item: new URL('/', Astro.site).href },
+		{ '@type': 'ListItem', position: 2, name: tool.name, item: url },
+	],
+};
 // Escape "<" so the JSON can never close the script tag early.
 const ld = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
 ---
@@ -47,6 +55,7 @@ const ld = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
 	<Fragment slot="head">
 		<script type="application/ld+json" set:html={ld(app)}></script>
 		<script type="application/ld+json" set:html={ld(faqLd)}></script>
+		<script type="application/ld+json" set:html={ld(breadcrumbs)}></script>
 	</Fragment>
 
 	<div class="container">

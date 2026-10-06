@@ -3,12 +3,24 @@ import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
 import PrivacyBadge from '../components/PrivacyBadge.astro';
 import { tools } from '../data/tools';
+
+const home = new URL('/', Astro.site).href;
+const siteLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@graph': [
+		{ '@type': 'WebSite', '@id': `${home}#website`, url: home, name: 'Gbam', inLanguage: 'en' },
+		{ '@type': 'Organization', '@id': `${home}#org`, name: 'Gbam', url: home, logo: new URL('/apple-touch-icon.png', Astro.site).href },
+	],
+}).replace(/</g, '\\u003c');
 ---
 
 <Base
 	title="Gbam – Free Online Tools That Keep Your Files Private"
 	description="Free tools for PDFs, images, invoices and CVs. Everything runs in your browser, so your files never leave your device."
 >
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={siteLd}></script>
+	</Fragment>
 	<div class="container">
 		<section class="hero">
 			<h1>Free tools that keep your files private</h1>

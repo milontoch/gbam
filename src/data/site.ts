@@ -5,4 +5,6 @@ export const site = {
 	email: 'milonairetouch@gmail.com',
 	updated: '6 October 2026', // update this whenever you change the Privacy or Terms text
 	country: 'Nigeria',
+	// Paste the content value from Google Search Console's "HTML tag" verification here (Milestone 7 steps).
+	googleVerification: '',
 };

@@ -323,7 +323,12 @@ a.card:hover {
 }
 
 .card-soon {
-	opacity: 0.6;
+	background: var(--surface);
+}
+
+.card-soon .tile {
+	background: var(--line);
+	color: var(--muted);
 }
 
 .tile {
