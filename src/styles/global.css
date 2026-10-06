@@ -431,6 +431,58 @@ a.card:hover {
 	font-weight: 600;
 }
 
+.options {
+	display: grid;
+	gap: 0 1rem;
+	grid-template-columns: 1fr;
+	margin-top: 1rem;
+}
+
+.options input[type='range'] {
+	min-height: 32px;
+	padding: 0;
+	accent-color: var(--brand);
+}
+
+.results {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0 0;
+	display: grid;
+	gap: 0.75rem;
+}
+
+.result {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+}
+
+.result-name {
+	font-weight: 600;
+	overflow-wrap: anywhere;
+	margin: 0;
+}
+
+.result-detail {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.result.failed {
+	border-color: #fca5a5;
+}
+
+.result.failed .result-detail {
+	color: var(--danger);
+}
+
 .steps {
 	padding-left: 1.25rem;
 }
@@ -481,6 +533,10 @@ a.card:hover {
 
 	.tool-box {
 		padding: 1.5rem;
+	}
+
+	.options {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 

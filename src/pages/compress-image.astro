@@ -1,0 +1,73 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose one or more photos (JPG, PNG or WebP). You can pick up to 20.',
+	'Leave the quality at 70 for a good balance, or slide it lower for smaller files.',
+	'Press Download next to each photo when it finishes.',
+];
+
+const faq = [
+	{
+		q: 'Are my photos uploaded anywhere?',
+		a: 'No. Compression happens inside your browser, on your own phone or computer. Your photos are never sent to Gbam or to anyone else.',
+	},
+	{
+		q: 'What quality should I choose?',
+		a: 'A quality of 60 to 80 keeps photos looking sharp while making them much smaller. Go lower only if a website demands a very small file.',
+	},
+	{
+		q: 'Why did a PNG turn into a JPG?',
+		a: 'JPEG and WebP can shrink photos far more than PNG can. Transparent areas of a PNG become white in JPEG. Pick WebP if you want to keep the transparency.',
+	},
+	{
+		q: 'Why was my file not made smaller?',
+		a: 'Some images are already compressed. When we cannot make a file smaller, we give you back the original instead of a bigger one.',
+	},
+	{
+		q: 'Can I compress iPhone HEIC photos?',
+		a: 'Not yet. Most browsers cannot open HEIC files. On your iPhone, go to Settings, Camera, Formats and choose Most Compatible, or share the photo as a JPG.',
+	},
+];
+---
+
+<ToolPage
+	slug="compress-image"
+	intro="Make photos smaller for WhatsApp, email, school portals and job applications. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="image/jpeg,image/png,image/webp" multiple title="Tap to choose photos" />
+
+	<div class="options">
+		<label class="field">
+			<span>Quality: <output id="quality-value">70</output></span>
+			<input type="range" id="quality" min="10" max="95" step="5" value="70" />
+		</label>
+		<label class="field">
+			<span>Maximum width</span>
+			<select id="max-width">
+				<option value="0">Keep original size</option>
+				<option value="2000">2000 px (large)</option>
+				<option value="1600" selected>1600 px (good for screens)</option>
+				<option value="1200">1200 px</option>
+				<option value="800">800 px (small)</option>
+			</select>
+		</label>
+		<label class="field">
+			<span>Save as</span>
+			<select id="format">
+				<option value="image/jpeg" selected>JPEG (works everywhere)</option>
+				<option value="image/webp">WebP (smaller, keeps transparency)</option>
+			</select>
+		</label>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/compress-image';
+</script>

@@ -24,7 +24,7 @@ export const tools: Tool[] = [
 		summary: 'Make photos smaller for WhatsApp, email and uploads.',
 		badge: 'IMG',
 		category: 'Image',
-		live: false,
+		live: true,
 		metaTitle: 'Compress Image Online – Free & Private | Gbam',
 		metaDescription:
 			'Reduce JPG, PNG and WebP file size right in your browser. Free, no sign-up, and your photos never leave your device.',

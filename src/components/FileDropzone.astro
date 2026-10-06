@@ -1,0 +1,17 @@
+---
+interface Props {
+	id: string; // id of the file input; the <label> id is "<id>-zone"
+	accept: string;
+	multiple?: boolean;
+	title?: string;
+	hint?: string;
+}
+
+const { id, accept, multiple = false, title = 'Tap to choose a file', hint = 'or drag and drop it here' } = Astro.props;
+---
+
+<label class="dropzone" id={`${id}-zone`} for={id}>
+	<strong>{title}</strong>
+	<span class="muted">{hint}</span>
+	<input type="file" id={id} accept={accept} multiple={multiple} />
+</label>
