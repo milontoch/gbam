@@ -153,6 +153,10 @@ p {
 
 .site-nav.open {
 	display: block;
+	/* On short phones the menu scrolls instead of running off screen. */
+	max-height: calc(100vh - 3.5rem);
+	max-height: calc(100dvh - 3.5rem);
+	overflow-y: auto;
 }
 
 .site-nav ul {

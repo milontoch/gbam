@@ -30,7 +30,7 @@ const tools = liveTools();
 					))
 				}
 			</ul>
-			<p class="nav-heading">Gbam</p>
+			{tools.length > 0 && <p class="nav-heading">More</p>}
 			<ul>
 				<li><a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a></li>
 				<li><a href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Contact</a></li>
