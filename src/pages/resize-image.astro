@@ -1,0 +1,80 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose a photo (JPG, PNG or WebP).',
+	'Type the width or height you want. With "Keep proportions" ticked, the other number changes by itself.',
+	'Choose a format, press Resize, then Download.',
+];
+
+const faq = [
+	{
+		q: 'Is my photo uploaded anywhere?',
+		a: 'No. Resizing happens inside your browser on your own device. Your photo is never sent to Gbam or anyone else.',
+	},
+	{
+		q: 'What does "Keep proportions" mean?',
+		a: 'It stops the photo from looking stretched. When you change the width, the height changes to match, and the other way round. Untick it only if you need an exact width and height.',
+	},
+	{
+		q: 'Why is there a size limit?',
+		a: 'Phones and browsers can fail on very large images, so output is limited to 8000 px on a side and about 16 megapixels in total.',
+	},
+	{
+		q: 'Which format should I choose?',
+		a: 'JPEG is best for photos. PNG keeps sharp edges and transparency but makes bigger files. WebP is small and also keeps transparency.',
+	},
+];
+---
+
+<ToolPage
+	slug="resize-image"
+	intro="Change a photo to an exact width and height in pixels. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="image/jpeg,image/png,image/webp" title="Tap to choose a photo" />
+
+	<div id="editor" class="hidden">
+		<p class="muted" id="original-info"></p>
+
+		<div class="options">
+			<label class="field">
+				<span>Width (px)</span>
+				<input type="number" id="width" inputmode="numeric" min="1" max="8000" />
+			</label>
+			<label class="field">
+				<span>Height (px)</span>
+				<input type="number" id="height" inputmode="numeric" min="1" max="8000" />
+			</label>
+			<label class="choice">
+				<input type="checkbox" id="lock" checked />
+				<span>Keep proportions</span>
+			</label>
+			<label class="field">
+				<span>Save as</span>
+				<select id="format">
+					<option value="image/jpeg" selected>JPEG</option>
+					<option value="image/png">PNG</option>
+					<option value="image/webp">WebP</option>
+				</select>
+			</label>
+			<label class="field" id="quality-field">
+				<span>Quality: <output id="quality-value">85</output></span>
+				<input type="range" id="quality" min="10" max="100" step="5" value="85" />
+			</label>
+		</div>
+
+		<div class="actions">
+			<button type="button" class="btn" id="resize-btn">Resize</button>
+		</div>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/resize-image';
+</script>

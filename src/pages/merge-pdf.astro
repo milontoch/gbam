@@ -1,0 +1,52 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose two or more PDF files. You can add more later.',
+	'Use the ↑ and ↓ buttons to put them in the order you want.',
+	'Press Merge, then Download your combined PDF.',
+];
+
+const faq = [
+	{
+		q: 'Are my PDFs uploaded anywhere?',
+		a: 'No. Merging happens inside your browser, on your own device. Your documents are never sent to Gbam or anyone else.',
+	},
+	{
+		q: 'Is there a limit on how many files I can merge?',
+		a: 'You can merge up to 30 files at once, up to 100 MB each and 300 MB in total. Very large files may be slow on older phones.',
+	},
+	{
+		q: 'Why does it say my PDF is password-protected?',
+		a: 'Locked PDFs cannot be merged. Open the file, remove the password using the app you normally use, save a copy, and add that copy here.',
+	},
+	{
+		q: 'Will the merged PDF keep its quality?',
+		a: 'Yes. Pages are copied as they are, without being re-compressed.',
+	},
+];
+---
+
+<ToolPage
+	slug="merge-pdf"
+	intro="Combine several PDF files into one document, in the order you choose. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="application/pdf,.pdf" multiple title="Tap to choose PDF files" />
+
+	<ul class="results" id="file-list"></ul>
+
+	<div class="actions">
+		<button type="button" class="btn" id="merge-btn" disabled>Merge PDFs</button>
+		<button type="button" class="btn btn-secondary hidden" id="clear-btn">Clear all</button>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/merge-pdf';
+</script>

@@ -12,7 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "fflate": "^0.8.3",
+    "pdf-lib": "^1.17.1"
   },
   "allowScripts": {
     "esbuild": true

@@ -36,7 +36,7 @@ export const tools: Tool[] = [
 		summary: 'Change photo width and height to exact sizes.',
 		badge: 'IMG',
 		category: 'Image',
-		live: false,
+		live: true,
 		metaTitle: 'Resize Image Online – Free & Private | Gbam',
 		metaDescription:
 			'Resize photos to any width and height in your browser. Free, no sign-up, and your images never leave your device.',
@@ -48,7 +48,7 @@ export const tools: Tool[] = [
 		summary: 'Combine several PDFs into one file.',
 		badge: 'PDF',
 		category: 'PDF',
-		live: false,
+		live: true,
 		metaTitle: 'Merge PDF Files Online – Free & Private | Gbam',
 		metaDescription:
 			'Combine multiple PDF files into one in your browser. Free, no sign-up, and your documents never leave your device.',
@@ -60,7 +60,7 @@ export const tools: Tool[] = [
 		summary: 'Pull pages out of a PDF or cut it into parts.',
 		badge: 'PDF',
 		category: 'PDF',
-		live: false,
+		live: true,
 		metaTitle: 'Split PDF Online – Free & Private | Gbam',
 		metaDescription:
 			'Extract pages or split a PDF into separate files in your browser. Free, and your documents never leave your device.',

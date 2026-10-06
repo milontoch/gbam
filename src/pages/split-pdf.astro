@@ -1,0 +1,67 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose one PDF file.',
+	'Choose "Extract pages" and type the pages you want, like 1-3, 5. Or choose "Every page separately" to get one PDF per page in a ZIP file.',
+	'Press the button, then Download.',
+];
+
+const faq = [
+	{
+		q: 'Is my PDF uploaded anywhere?',
+		a: 'No. Splitting happens inside your browser, on your own device. Your document is never sent to Gbam or anyone else.',
+	},
+	{
+		q: 'How do I type the pages?',
+		a: 'Separate pages or ranges with commas. For example, "1-3, 5, 8-10" gives you pages 1, 2, 3, 5, 8, 9 and 10 in one new PDF. You can also repeat or reorder pages, such as "3, 1".',
+	},
+	{
+		q: 'What is a ZIP file?',
+		a: 'A ZIP file holds many files in one download. Most phones can open it with the Files app. Tap it to see your separate PDFs.',
+	},
+	{
+		q: 'Why does it say my PDF is password-protected?',
+		a: 'Locked PDFs cannot be split. Remove the password using the app you normally use, save a copy, and add that copy here.',
+	},
+];
+---
+
+<ToolPage
+	slug="split-pdf"
+	intro="Pull the pages you need out of a PDF, or cut it into one file per page. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="application/pdf,.pdf" title="Tap to choose a PDF file" />
+
+	<div id="editor" class="hidden">
+		<p class="muted" id="file-info"></p>
+
+		<label class="choice">
+			<input type="radio" name="mode" id="mode-extract" checked />
+			<span>Extract pages</span>
+		</label>
+		<label class="choice">
+			<input type="radio" name="mode" id="mode-all" />
+			<span>Every page separately (ZIP file)</span>
+		</label>
+
+		<label class="field" id="range-field">
+			<span>Pages to keep</span>
+			<input type="text" id="range" inputmode="text" autocomplete="off" />
+		</label>
+
+		<div class="actions">
+			<button type="button" class="btn" id="split-btn">Split PDF</button>
+		</div>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/split-pdf';
+</script>
