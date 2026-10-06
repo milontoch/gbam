@@ -1,10 +1,12 @@
+import { computeMask, isSupported as aiSupported, type Status } from './bg-removal';
 import { bindDropzone } from './dropzone';
 import { formatBytes } from './format';
+import { decodeImage } from './image-load';
+import { adjustImage, autoAdjust, isNeutral, type Adjust } from './image-enhance';
 import { addResultRow, baseName, byId, h, setStatus, urlKeeper } from './ui';
 
-const MAX_BYTES = 40 * 1024 * 1024;
 const MAX_PIXELS = 40_000_000;
-const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
+const WORK_MAX_SIDE = 2400; // plenty for a passport photo, and keeps phone memory use low
 const DPI = 300;
 const mmToPx = (mm: number) => Math.round((mm / 25.4) * DPI);
 
@@ -27,6 +29,8 @@ const PAPERS: Record<string, { w: number; h: number; name: string }> = {
 	a4: { w: mmToPx(210), h: mmToPx(297), name: 'A4' },
 };
 
+const BACKGROUNDS: Record<string, string> = { white: '#ffffff', red: '#d0101a', blue: '#438edb' };
+
 const zone = byId('file-input-zone');
 const input = byId<HTMLInputElement>('file-input');
 const editor = byId('editor');
@@ -40,19 +44,38 @@ const sheetBtn = byId<HTMLButtonElement>('sheet-btn');
 const status = byId('status');
 const results = byId<HTMLUListElement>('results');
 
-const ctx = canvas.getContext('2d')!;
+const aiBtn = byId<HTMLButtonElement>('ai-btn');
+const aiStatus = byId('ai-status');
+const aiProgress = byId<HTMLProgressElement>('ai-progress');
+const bgEl = byId<HTMLSelectElement>('bg');
+const brightEl = byId<HTMLInputElement>('brightness');
+const contrastEl = byId<HTMLInputElement>('contrast');
+const sharpEl = byId<HTMLInputElement>('sharpness');
+const autoBtn = byId<HTMLButtonElement>('auto-btn');
+const resetBtn = byId<HTMLButtonElement>('reset-btn');
+
+const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
 const urls = urlKeeper();
 
-let bitmap: ImageBitmap | null = null;
+let work: HTMLCanvasElement | null = null; // the photo, flattened and limited to WORK_MAX_SIDE
+let person: HTMLCanvasElement | null = null; // the photo with the background cut away (transparent)
+let flat: HTMLCanvasElement | null = null; // the person placed on the chosen background colour
 let fileName = 'photo';
-let cx = 0; // centre of the crop, in source-image pixels
+let cx = 0; // centre of the crop, in work-image pixels
 let cy = 0;
 let generation = 0; // bumps when a new photo is chosen, so slow results for an old photo are dropped
+let frame = 0;
 
 const preset = () => PRESETS[presetEl.value] ?? PRESETS['print-35x45'];
 const fail = (m: string) => setStatus(status, m, true);
+const source = () => flat ?? work!;
+const adjustment = (): Adjust => ({
+	brightness: Number(brightEl.value),
+	contrast: Number(contrastEl.value),
+	sharpness: Number(sharpEl.value),
+});
 
-// Size the on-screen crop box to the chosen photo shape.
+// ---------- the crop box ----------
 function sizeCanvas() {
 	const p = preset();
 	const cssW = Math.min(canvas.parentElement?.clientWidth || 300, 320);
@@ -63,33 +86,75 @@ function sizeCanvas() {
 	canvas.height = Math.round(((cssW * p.h) / p.w) * dpr);
 }
 
-// The part of the photo that is inside the frame, in source pixels.
+// The part of the photo that is inside the frame, in work-image pixels.
 function region() {
-	const b = bitmap!;
-	const cover = Math.max(canvas.width / b.width, canvas.height / b.height);
+	const src = source();
+	const cover = Math.max(canvas.width / src.width, canvas.height / src.height);
 	const scale = cover * Number(zoomEl.value);
 	const sw = canvas.width / scale;
 	const sh = canvas.height / scale;
-	cx = Math.min(Math.max(cx, sw / 2), b.width - sw / 2);
-	cy = Math.min(Math.max(cy, sh / 2), b.height - sh / 2);
+	cx = Math.min(Math.max(cx, sw / 2), src.width - sw / 2);
+	cy = Math.min(Math.max(cy, sh / 2), src.height - sh / 2);
 	return { sx: cx - sw / 2, sy: cy - sh / 2, sw, sh, scale };
 }
 
-function draw() {
-	if (!bitmap) return;
+function paint(target: CanvasRenderingContext2D, w: number, h: number, withAdjust: boolean) {
 	const { sx, sy, sw, sh } = region();
-	ctx.fillStyle = '#fff';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(bitmap, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+	target.fillStyle = '#fff';
+	target.fillRect(0, 0, w, h);
+	target.imageSmoothingQuality = 'high';
+	target.drawImage(source(), sx, sy, sw, sh, 0, 0, w, h);
+	const a = adjustment();
+	if (withAdjust && !isNeutral(a)) {
+		const img = target.getImageData(0, 0, w, h);
+		adjustImage(img, a);
+		target.putImageData(img, 0, 0);
+	}
+}
+
+function draw() {
+	if (work) paint(ctx, canvas.width, canvas.height, true);
+}
+
+// Redraw at most once per screen refresh, so dragging and sliders stay smooth on cheap phones.
+function scheduleDraw() {
+	if (frame) return;
+	frame = requestAnimationFrame(() => {
+		frame = 0;
+		draw();
+	});
 }
 
 function resetView() {
-	if (!bitmap) return;
+	if (!work) return;
 	sizeCanvas();
 	zoomEl.value = '1';
-	cx = bitmap.width / 2;
-	cy = bitmap.height * 0.45; // faces sit a little above the middle of most photos
+	cx = work.width / 2;
+	cy = work.height * 0.45; // faces sit a little above the middle of most photos
 	draw();
+}
+
+// ---------- loading a photo ----------
+function clearAi() {
+	person = null;
+	flat = null;
+	bgEl.value = 'original';
+	bgEl.disabled = true;
+	aiStatus.textContent = '';
+	aiProgress.classList.add('hidden');
+	aiBtn.textContent = 'Remove background (AI)';
+	aiBtn.disabled = false;
+}
+
+function resetAdjust() {
+	brightEl.value = contrastEl.value = sharpEl.value = '0';
+	showAdjustValues();
+}
+
+function showAdjustValues() {
+	byId('brightness-value').textContent = brightEl.value;
+	byId('contrast-value').textContent = contrastEl.value;
+	byId('sharpness-value').textContent = sharpEl.value;
 }
 
 async function onFiles(chosen: File[]) {
@@ -99,22 +164,28 @@ async function onFiles(chosen: File[]) {
 	results.replaceChildren();
 	setStatus(status, chosen.length > 1 ? 'Only the first photo was used.' : '');
 
-	if (!ACCEPTED.includes(file.type)) return fail('This file type is not supported. Use JPG, PNG or WebP.');
-	if (file.size > MAX_BYTES) return fail(`This file is larger than ${formatBytes(MAX_BYTES)}.`);
-
-	let next: ImageBitmap;
+	let bitmap: ImageBitmap;
 	try {
-		next = await createImageBitmap(file);
-	} catch {
-		return fail('This image could not be read. It may be damaged.');
+		bitmap = await decodeImage(file, MAX_PIXELS);
+	} catch (err) {
+		return fail(err instanceof Error ? err.message : 'This image could not be read.');
 	}
-	if (next.width * next.height > MAX_PIXELS) {
-		next.close();
-		return fail('This image is too large to handle safely. Use a smaller photo.');
-	}
-	bitmap?.close();
-	bitmap = next;
+
+	const k = Math.min(1, WORK_MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+	const w = document.createElement('canvas');
+	w.width = Math.max(1, Math.round(bitmap.width * k));
+	w.height = Math.max(1, Math.round(bitmap.height * k));
+	const wctx = w.getContext('2d')!;
+	wctx.fillStyle = '#fff'; // transparent photos start on white
+	wctx.fillRect(0, 0, w.width, w.height);
+	wctx.imageSmoothingQuality = 'high';
+	wctx.drawImage(bitmap, 0, 0, w.width, w.height);
+	bitmap.close();
+
+	work = w;
 	fileName = baseName(file.name, 'photo');
+	clearAi();
+	resetAdjust();
 	editor.classList.remove('hidden');
 	syncPreset();
 }
@@ -124,6 +195,106 @@ function syncPreset() {
 	resetView();
 }
 
+// ---------- AI background removal ----------
+function compose() {
+	if (!work || !person || bgEl.value === 'original') {
+		flat = null;
+		return;
+	}
+	const f = document.createElement('canvas');
+	f.width = work.width;
+	f.height = work.height;
+	const c = f.getContext('2d')!;
+	c.fillStyle = BACKGROUNDS[bgEl.value] ?? '#ffffff';
+	c.fillRect(0, 0, f.width, f.height);
+	c.drawImage(person, 0, 0);
+	flat = f;
+}
+
+function showAiStatus(s: Status) {
+	aiStatus.textContent = s.text;
+	if (s.fraction !== undefined) {
+		aiProgress.classList.remove('hidden');
+		aiProgress.value = Math.round(s.fraction * 100);
+	} else {
+		aiProgress.classList.add('hidden');
+	}
+}
+
+aiBtn.addEventListener('click', async () => {
+	if (!work) return;
+	if (!aiSupported()) {
+		aiStatus.textContent = 'This browser cannot run the AI tool. Try the latest Chrome, Firefox or Safari.';
+		return;
+	}
+	const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+	const slow = conn?.saveData || /(^|-)(2g|3g)$/.test(conn?.effectiveType ?? '');
+	if (slow && !person && !window.confirm('The first time, this downloads about 9 MB. Continue?')) return;
+
+	const myGen = generation;
+	const target = work;
+	aiBtn.disabled = true;
+	showAiStatus({ text: 'Getting ready…' });
+	try {
+		const mask = await computeMask(target, showAiStatus);
+		if (myGen !== generation) return;
+		const p = document.createElement('canvas');
+		p.width = target.width;
+		p.height = target.height;
+		const pc = p.getContext('2d')!;
+		pc.drawImage(target, 0, 0);
+		pc.globalCompositeOperation = 'destination-in'; // keep the photo only where the mask says "person"
+		pc.drawImage(mask, 0, 0);
+		person = p;
+		bgEl.disabled = false;
+		bgEl.value = 'white';
+		compose();
+		draw();
+		aiBtn.textContent = 'Remove background again';
+		showAiStatus({ text: 'Done. Check the edges around your hair and shoulders, then choose a colour.' });
+	} catch (err) {
+		if (myGen !== generation) return;
+		showAiStatus({ text: err instanceof Error ? err.message : 'The background could not be removed.' });
+	} finally {
+		if (myGen === generation) aiBtn.disabled = false;
+	}
+});
+
+bgEl.addEventListener('change', () => {
+	compose();
+	draw();
+});
+
+// ---------- brightness, contrast, sharpness ----------
+for (const el of [brightEl, contrastEl, sharpEl]) {
+	el.addEventListener('input', () => {
+		showAdjustValues();
+		scheduleDraw();
+	});
+}
+
+resetBtn.addEventListener('click', () => {
+	resetAdjust();
+	draw();
+});
+
+autoBtn.addEventListener('click', () => {
+	if (!work) return;
+	// Measure the photo as it is now, without any adjustment applied.
+	const probe = document.createElement('canvas');
+	probe.width = 160;
+	probe.height = Math.round((160 * canvas.height) / canvas.width);
+	const pctx = probe.getContext('2d', { willReadFrequently: true })!;
+	const { sx, sy, sw, sh } = region();
+	pctx.drawImage(source(), sx, sy, sw, sh, 0, 0, probe.width, probe.height);
+	const a = autoAdjust(pctx.getImageData(0, 0, probe.width, probe.height));
+	brightEl.value = String(a.brightness);
+	contrastEl.value = String(a.contrast);
+	sharpEl.value = String(a.sharpness);
+	showAdjustValues();
+	draw();
+});
+
 // ---------- positioning: drag, zoom, keyboard ----------
 let drag: { x: number; y: number } | null = null;
 
@@ -132,20 +303,20 @@ canvas.addEventListener('pointerdown', (e) => {
 	canvas.setPointerCapture(e.pointerId);
 });
 canvas.addEventListener('pointermove', (e) => {
-	if (!drag || !bitmap) return;
+	if (!drag || !work) return;
 	const { scale } = region();
 	const k = canvas.width / canvas.getBoundingClientRect().width; // screen px -> canvas px
 	cx -= ((e.clientX - drag.x) * k) / scale;
 	cy -= ((e.clientY - drag.y) * k) / scale;
 	drag = { x: e.clientX, y: e.clientY };
-	draw();
+	scheduleDraw();
 });
 const endDrag = () => (drag = null);
 canvas.addEventListener('pointerup', endDrag);
 canvas.addEventListener('pointercancel', endDrag);
 
 canvas.addEventListener('keydown', (e) => {
-	if (!bitmap) return;
+	if (!work) return;
 	const { sw, sh } = region();
 	const step = 0.04;
 	const moves: Record<string, [number, number]> = {
@@ -159,31 +330,26 @@ canvas.addEventListener('keydown', (e) => {
 	e.preventDefault();
 	cx += m[0];
 	cy += m[1];
-	draw();
+	scheduleDraw();
 });
 
-zoomEl.addEventListener('input', draw);
+zoomEl.addEventListener('input', scheduleDraw);
 presetEl.addEventListener('change', syncPreset);
 
 // ---------- output ----------
 function renderPhoto(): HTMLCanvasElement {
 	const p = preset();
-	const { sx, sy, sw, sh } = region();
 	const out = document.createElement('canvas');
 	out.width = p.w;
 	out.height = p.h;
-	const c = out.getContext('2d')!;
-	c.fillStyle = '#fff';
-	c.fillRect(0, 0, p.w, p.h);
-	c.imageSmoothingQuality = 'high';
-	c.drawImage(bitmap!, sx, sy, sw, sh, 0, 0, p.w, p.h);
+	paint(out.getContext('2d', { willReadFrequently: true })!, p.w, p.h, true);
 	return out;
 }
 
 const toJpeg = (c: HTMLCanvasElement, q: number) => new Promise<Blob | null>((r) => c.toBlob(r, 'image/jpeg', q));
 
 photoBtn.addEventListener('click', async () => {
-	if (!bitmap) return;
+	if (!work) return;
 	const myGen = generation;
 	const p = preset();
 	urls.clear();
@@ -212,7 +378,7 @@ photoBtn.addEventListener('click', async () => {
 	}
 });
 
-// Fits as many photos as possible on the paper, trying both paper directions.
+// Fits as many photos as possible on the paper.
 function layout(paperW: number, paperH: number, pw: number, ph: number) {
 	const margin = mmToPx(5);
 	const gap = mmToPx(2);
@@ -222,7 +388,7 @@ function layout(paperW: number, paperH: number, pw: number, ph: number) {
 }
 
 sheetBtn.addEventListener('click', async () => {
-	if (!bitmap) return;
+	if (!work) return;
 	const myGen = generation;
 	const p = preset();
 	const paper = PAPERS[paperEl.value] ?? PAPERS['4x6'];
@@ -281,4 +447,5 @@ sheetBtn.addEventListener('click', async () => {
 	}
 });
 
+showAdjustValues();
 bindDropzone(zone, input, (files) => void onFiles(files));

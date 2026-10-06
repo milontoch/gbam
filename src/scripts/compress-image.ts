@@ -1,10 +1,9 @@
 import { bindDropzone } from './dropzone';
 import { formatBytes } from './format';
+import { decodeImage } from './image-load';
 
 const MAX_FILES = 20;
-const MAX_BYTES = 40 * 1024 * 1024; // 40 MB per file
 const MAX_PIXELS = 60_000_000; // 60 megapixels; bigger can crash phones
-const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const zone = $<HTMLElement>('file-input-zone');
@@ -26,26 +25,9 @@ function setStatus(message: string, isError = false) {
 }
 
 async function compressOne(file: File, type: string, q: number, maxW: number) {
-	if (!ACCEPTED.includes(file.type)) {
-		throw new Error('This file type is not supported. Use JPG, PNG or WebP.');
-	}
-	if (file.size > MAX_BYTES) {
-		throw new Error(`This file is larger than ${formatBytes(MAX_BYTES)}.`);
-	}
-
-	let bitmap: ImageBitmap;
-	try {
-		bitmap = await createImageBitmap(file);
-	} catch {
-		throw new Error('This image could not be read. It may be damaged.');
-	}
-
+	const bitmap = await decodeImage(file, MAX_PIXELS);
 	const originalW = bitmap.width;
 	const originalH = bitmap.height;
-	if (originalW * originalH > MAX_PIXELS) {
-		bitmap.close();
-		throw new Error('This image is too large for a phone or browser to handle safely.');
-	}
 
 	let w = originalW;
 	let h = originalH;

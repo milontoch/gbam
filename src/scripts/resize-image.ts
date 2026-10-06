@@ -1,11 +1,11 @@
 import { bindDropzone } from './dropzone';
 import { formatBytes } from './format';
+import { decodeImage } from './image-load';
 import { addResultRow, baseName, byId, setStatus, urlKeeper } from './ui';
 
-const MAX_BYTES = 40 * 1024 * 1024;
 const MAX_SIDE = 8000;
 const MAX_OUTPUT_PIXELS = 16_000_000; // older iPhones fail silently above ~16.7 megapixels
-const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp'];
+const MAX_PIXELS = 60_000_000;
 
 const zone = byId('file-input-zone');
 const input = byId<HTMLInputElement>('file-input');
@@ -37,14 +37,11 @@ async function onFiles(chosen: File[]) {
 	results.replaceChildren();
 	setStatus(status, chosen.length > 1 ? 'Only the first image was used. Resize one image at a time.' : '');
 
-	if (!ACCEPTED.includes(file.type)) return fail('This file type is not supported. Use JPG, PNG or WebP.');
-	if (file.size > MAX_BYTES) return fail(`This file is larger than ${formatBytes(MAX_BYTES)}.`);
-
 	let next: ImageBitmap;
 	try {
-		next = await createImageBitmap(file);
-	} catch {
-		return fail('This image could not be read. It may be damaged.');
+		next = await decodeImage(file, MAX_PIXELS);
+	} catch (err) {
+		return fail(err instanceof Error ? err.message : 'This image could not be read.');
 	}
 	bitmap?.close();
 	bitmap = next;

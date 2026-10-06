@@ -1,0 +1,6 @@
+modnet-uint8.onnx
+  MODNet portrait matting model, 8-bit quantized ONNX export.
+  Original: https://github.com/ZHKKKe/MODNet (Apache License 2.0)
+  ONNX export: https://huggingface.co/Xenova/modnet (Apache License 2.0)
+  Licence text: https://www.apache.org/licenses/LICENSE-2.0
+  Changing this file? Rename it (for example modnet-uint8-v2.onnx) because it is cached for a year.

@@ -5,6 +5,7 @@ import FileDropzone from '../components/FileDropzone.astro';
 const steps = [
 	'Take or choose a photo: face the camera, in even light, in front of a plain light wall. Nothing covering your face.',
 	'Choose the photo size you need, then drag the photo and use the zoom slider so your face fills the oval.',
+	'Optional: remove the background and pick a colour, or press Auto-fix lighting.',
 	'Download the single photo, or make a print sheet with several copies to print at a photo shop.',
 ];
 
@@ -14,12 +15,20 @@ const faq = [
 		a: 'No. Your photo is cropped inside your browser, on your own device. It is never sent to Gbam or anyone else.',
 	},
 	{
-		q: 'Can you change my photo background to white?',
-		a: 'Not at the moment. Take the photo in front of a plain white or light wall, with light on your face and no shadows behind you. Many shops and photo apps can also do this for you.',
+		q: 'Can I change my photo background to white or red?',
+		a: 'Yes. Press "Remove background (AI)", then choose white, red or light blue. It works best on a well-lit photo of one person, so always zoom in and check the edges around your hair and shoulders. For the cleanest result, still take the photo in front of a plain light wall.',
 	},
 	{
 		q: 'What size does Nigeria need?',
 		a: 'For a printed Nigerian passport photo the common size is 35 × 45 mm with a plain white background. For the Nigeria Immigration Service online portal, the photo is usually 600 × 800 pixels and under 2 MB. Rules can change and can differ by office, so confirm with the office or portal you are using.',
+	},
+	{
+		q: 'Why does the background tool download something?',
+		a: 'The AI model that finds you in the photo is about 9 MB (the model plus the small program that runs it). It downloads once and is then remembered by your browser. It runs on your device, and your photo is not sent anywhere.',
+	},
+	{
+		q: 'Which background colour should I use?',
+		a: 'Use the colour your application asks for. Nigerian passport photos need a plain white background. Some visas and forms ask for red or blue. Always check the official instructions.',
 	},
 	{
 		q: 'Will this be accepted for my application?',
@@ -38,7 +47,7 @@ const faq = [
 	steps={steps}
 	faq={faq}
 >
-	<FileDropzone id="file-input" accept="image/jpeg,image/png,image/webp" title="Tap to choose a photo" />
+	<FileDropzone id="file-input" accept="image/*,.heic,.heif" title="Tap to choose a photo" />
 
 	<div id="editor" class="hidden">
 		<label class="field spaced">
@@ -61,6 +70,46 @@ const faq = [
 			<span>Zoom</span>
 			<input type="range" id="zoom" min="1" max="4" step="0.05" value="1" />
 		</label>
+
+		<h2 class="form-section">Background</h2>
+		<p class="muted">
+			Optional. Works best on a well-lit photo of one person. The first time, it downloads about 9 MB (once), then works faster. Your photo is
+			still never uploaded.
+		</p>
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="ai-btn">Remove background (AI)</button>
+		</div>
+		<progress id="ai-progress" class="hidden" max="100" value="0"></progress>
+		<p class="status" id="ai-status" role="status" aria-live="polite"></p>
+		<label class="field">
+			<span>Background colour</span>
+			<select id="bg" disabled>
+				<option value="original" selected>Keep my original background</option>
+				<option value="white">White</option>
+				<option value="red">Red</option>
+				<option value="blue">Light blue</option>
+			</select>
+		</label>
+
+		<h2 class="form-section">Improve the photo</h2>
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="auto-btn">Auto-fix lighting</button>
+			<button type="button" class="btn btn-secondary" id="reset-btn">Reset</button>
+		</div>
+		<div class="options spaced">
+			<label class="field">
+				<span>Brightness: <output id="brightness-value">0</output></span>
+				<input type="range" id="brightness" min="-50" max="50" step="1" value="0" />
+			</label>
+			<label class="field">
+				<span>Contrast: <output id="contrast-value">0</output></span>
+				<input type="range" id="contrast" min="-50" max="50" step="1" value="0" />
+			</label>
+			<label class="field">
+				<span>Sharpness: <output id="sharpness-value">0</output></span>
+				<input type="range" id="sharpness" min="0" max="100" step="1" value="0" />
+			</label>
+		</div>
 
 		<div class="actions">
 			<button type="button" class="btn" id="photo-btn">Download photo</button>

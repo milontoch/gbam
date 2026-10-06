@@ -1,0 +1,6 @@
+# Cloudflare Pages: cache rules. Security headers are added in the security milestone.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/models/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -3,7 +3,7 @@ import ToolPage from '../layouts/ToolPage.astro';
 import FileDropzone from '../components/FileDropzone.astro';
 
 const steps = [
-	'Tap the box and choose a photo (JPG, PNG or WebP).',
+	'Tap the box and choose a photo (JPG, PNG, WebP, GIF, BMP or AVIF).',
 	'Type the width or height you want. With "Keep proportions" ticked, the other number changes by itself.',
 	'Choose a format, press Resize, then Download.',
 ];
@@ -34,7 +34,7 @@ const faq = [
 	steps={steps}
 	faq={faq}
 >
-	<FileDropzone id="file-input" accept="image/jpeg,image/png,image/webp" title="Tap to choose a photo" />
+	<FileDropzone id="file-input" accept="image/*,.heic,.heif" title="Tap to choose a photo" />
 
 	<div id="editor" class="hidden">
 		<p class="muted" id="original-info"></p>
