@@ -1,0 +1,256 @@
+/* Styles for printable documents (invoice, CV). Used by elements built in the browser. */
+.doc {
+	--doc-accent: #0f766e;
+	background: #fff;
+	color: #111827;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	padding: 1rem;
+	font-size: 0.9rem;
+	line-height: 1.45;
+	overflow-wrap: anywhere;
+}
+
+.doc h2,
+.doc h3,
+.doc p {
+	margin: 0;
+}
+
+.doc-pre {
+	white-space: pre-line;
+}
+
+.doc-muted {
+	color: #4b5563;
+}
+
+.doc-top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: space-between;
+	margin-bottom: 1.25rem;
+}
+
+.doc-logo {
+	max-width: 160px;
+	max-height: 70px;
+	margin-bottom: 0.4rem;
+	object-fit: contain;
+}
+
+.doc-biz {
+	font-size: 1.15rem;
+	font-weight: 700;
+}
+
+.doc-title {
+	font-size: 1.6rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	color: var(--doc-accent);
+}
+
+.doc-meta {
+	text-align: left;
+}
+
+.doc-label {
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #6b7280;
+	margin-bottom: 0.15rem;
+}
+
+.doc-stamp {
+	display: inline-block;
+	margin-top: 0.4rem;
+	padding: 0.1rem 0.6rem;
+	border: 2px solid var(--doc-accent);
+	color: var(--doc-accent);
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	border-radius: 4px;
+}
+
+.doc table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	margin: 1.25rem 0 0.75rem;
+}
+
+.doc th {
+	text-align: left;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	background: var(--doc-accent);
+	color: #fff;
+	padding: 0.4rem 0.4rem;
+}
+
+.doc td {
+	padding: 0.45rem 0.4rem;
+	border-bottom: 1px solid #e5e7eb;
+	vertical-align: top;
+}
+
+.doc .num {
+	text-align: right;
+}
+
+.doc .col-qty {
+	width: 14%;
+}
+
+.doc .col-price {
+	width: 28%;
+}
+
+.doc .col-amount {
+	width: 29%;
+}
+
+.doc th,
+.doc td {
+	padding-left: 0.25rem;
+	padding-right: 0.25rem;
+}
+
+.doc th {
+	font-size: 0.65rem;
+	letter-spacing: 0.02em;
+}
+
+.doc td.num {
+	white-space: nowrap;
+	font-size: 0.8rem;
+}
+
+.doc-totals {
+	margin-left: auto;
+	width: min(100%, 18rem);
+}
+
+.doc-totals div {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.2rem 0;
+}
+
+.doc-totals .grand {
+	border-top: 2px solid var(--doc-accent);
+	margin-top: 0.3rem;
+	padding-top: 0.4rem;
+	font-weight: 800;
+	font-size: 1.05rem;
+}
+
+.doc-notes {
+	margin-top: 1.5rem;
+}
+
+/* CV */
+.cv-name {
+	font-size: 1.7rem;
+	font-weight: 800;
+	line-height: 1.15;
+}
+
+.cv-role {
+	color: var(--doc-accent);
+	font-weight: 600;
+	font-size: 1.05rem;
+}
+
+.cv-section {
+	margin-top: 1.1rem;
+}
+
+.cv-section h3 {
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--doc-accent);
+	border-bottom: 2px solid var(--doc-accent);
+	padding-bottom: 0.15rem;
+	margin-bottom: 0.5rem;
+}
+
+.cv-entry {
+	margin-bottom: 0.7rem;
+	break-inside: avoid;
+}
+
+.cv-entry-head {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0 1rem;
+	font-weight: 700;
+}
+
+.cv-entry-head .dates {
+	font-weight: 400;
+	color: #4b5563;
+}
+
+.cv-section > ul {
+	margin: 0;
+	padding-left: 1.1rem;
+}
+
+.cv-entry ul {
+	margin: 0.2rem 0 0;
+	padding-left: 1.1rem;
+}
+
+@media (min-width: 40rem) {
+	.doc {
+		padding: 2rem;
+		font-size: 0.95rem;
+	}
+
+	.doc th,
+	.doc td {
+		padding-left: 0.4rem;
+		padding-right: 0.4rem;
+	}
+
+	.doc th {
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+	}
+
+	.doc td.num {
+		font-size: inherit;
+	}
+
+	.doc-meta {
+		text-align: right;
+	}
+}
+
+@media print {
+	.doc {
+		border: 0;
+		border-radius: 0;
+		padding: 0;
+		font-size: 10.5pt;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	.doc-meta {
+		text-align: right;
+	}
+
+	.doc tr,
+	.doc-totals {
+		break-inside: avoid;
+	}
+}

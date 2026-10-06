@@ -527,6 +527,71 @@ a.card:hover {
 	display: none !important;
 }
 
+.form-grid {
+	display: grid;
+	gap: 0 1rem;
+	grid-template-columns: 1fr;
+}
+
+.field input[type='date'] {
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.entry {
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.75rem 1rem 0.25rem;
+	margin-bottom: 0.75rem;
+	background: var(--surface);
+}
+
+.entry-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+}
+
+.form-section {
+	margin: 1.5rem 0 0.5rem;
+	font-size: 1.1rem;
+}
+
+/* Printing: only the document (.doc) is printed; everything else is hidden. */
+@page {
+	size: A4;
+	margin: 12mm;
+}
+
+@media print {
+	.site-header,
+	.site-footer,
+	.skip-link,
+	.tool-head,
+	.privacy-badge,
+	.prose,
+	.related,
+	.no-print {
+		display: none !important;
+	}
+
+	body {
+		display: block;
+		min-height: 0;
+	}
+
+	.container {
+		max-width: none;
+		padding: 0;
+	}
+
+	.tool-box {
+		border: 0;
+		padding: 0;
+	}
+}
+
 .steps {
 	padding-left: 1.25rem;
 }
@@ -582,6 +647,14 @@ a.card:hover {
 	.options {
 		grid-template-columns: repeat(3, 1fr);
 	}
+
+	.form-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.form-grid .wide {
+		grid-column: 1 / -1;
+	}
 }
 
 @media (min-width: 60rem) {
@@ -595,4 +668,41 @@ a.card:hover {
 		scroll-behavior: auto !important;
 		transition: none !important;
 	}
+}
+
+.spaced {
+	margin-top: 1rem;
+}
+
+/* Passport photo crop box */
+.crop-wrap {
+	position: relative;
+	width: fit-content;
+	max-width: 100%;
+	margin: 0 auto;
+	border: 1px solid var(--line);
+	line-height: 0;
+}
+
+.crop-wrap canvas {
+	touch-action: none; /* dragging moves the photo instead of scrolling the page */
+	cursor: grab;
+	max-width: 100%;
+}
+
+.face-guide {
+	position: absolute;
+	left: 20%;
+	top: 8%;
+	width: 60%;
+	height: 70%;
+	border: 2px dashed rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+	pointer-events: none;
+}
+
+.crop-hint {
+	text-align: center;
+	margin: 0.5rem 0 1rem;
 }

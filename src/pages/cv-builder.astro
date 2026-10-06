@@ -1,0 +1,122 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import '../styles/document.css';
+
+const steps = [
+	'Fill in your details. Empty sections are left out of your CV automatically.',
+	'Add your jobs and schools. Write what you did with one point per line.',
+	'Check the preview, then press "Print or save as PDF". In the print window, choose "Save as PDF" as the printer.',
+];
+
+const faq = [
+	{
+		q: 'Is my CV information uploaded anywhere?',
+		a: 'No. Everything you type stays in your browser and disappears when you close or refresh the page. Gbam does not receive it and cannot see it.',
+	},
+	{
+		q: 'How do I get a PDF on my phone?',
+		a: 'Press "Print or save as PDF". On Android Chrome, choose "Save as PDF" as the printer, then tap the PDF button. On iPhone, pinch outward on the small preview to open it, then tap the share icon and choose "Save to Files".',
+	},
+	{
+		q: 'Will my CV pass employer screening software?',
+		a: 'Yes. The PDF contains real text, not a picture, and uses a simple one-column layout, which is what screening software reads best.',
+	},
+	{
+		q: 'Should I add a photo, date of birth or marital status?',
+		a: 'Many employers no longer need them, and some countries advise against them. Add them in "Additional information" only if the job advert asks for them.',
+	},
+	{
+		q: 'Can I save my CV and edit it later?',
+		a: 'Not yet. Nothing is stored, which keeps your information private. Save the PDF, and keep your details in a notes app so you can paste them back when you need to update.',
+	},
+];
+---
+
+<ToolPage
+	slug="cv-builder"
+	intro="Fill in the form, check the preview, and save a clean, simple CV as PDF. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<div class="no-print">
+		<h2 class="form-section">About you</h2>
+		<div class="form-grid">
+			<label class="field">
+				<span>Full name</span>
+				<input type="text" id="name" autocomplete="name" maxlength="80" />
+			</label>
+			<label class="field">
+				<span>Job title you want</span>
+				<input type="text" id="title" maxlength="80" placeholder="e.g. Accountant" />
+			</label>
+			<label class="field">
+				<span>Email</span>
+				<input type="email" id="email" autocomplete="email" maxlength="100" />
+			</label>
+			<label class="field">
+				<span>Phone</span>
+				<input type="tel" id="phone" autocomplete="tel" maxlength="30" />
+			</label>
+			<label class="field">
+				<span>Location</span>
+				<input type="text" id="location" maxlength="80" placeholder="e.g. Lagos, Nigeria" />
+			</label>
+			<label class="field">
+				<span>LinkedIn or website (optional)</span>
+				<input type="text" id="link" maxlength="100" />
+			</label>
+			<label class="field wide">
+				<span>Profile (2 to 3 sentences about you)</span>
+				<textarea id="summary" rows="4" maxlength="800"></textarea>
+			</label>
+		</div>
+
+		<h2 class="form-section">Work experience</h2>
+		<div id="jobs"></div>
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="add-job">+ Add job</button>
+		</div>
+
+		<h2 class="form-section">Education</h2>
+		<div id="schools"></div>
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="add-school">+ Add school</button>
+		</div>
+
+		<h2 class="form-section">More</h2>
+		<div class="form-grid">
+			<label class="field wide">
+				<span>Skills (separate with commas or new lines)</span>
+				<textarea id="skills" rows="3" maxlength="800" placeholder="e.g. Microsoft Excel, Customer service, Bookkeeping"></textarea>
+			</label>
+			<label class="field wide">
+				<span>Additional information (one per line, optional)</span>
+				<textarea id="extra" rows="3" maxlength="500" placeholder="e.g. Languages: English, Yoruba"></textarea>
+			</label>
+			<label class="field wide">
+				<span>Referees (optional)</span>
+				<textarea id="referees" rows="3" maxlength="500" placeholder="Name, position, phone or email. Or write: Available on request."></textarea>
+			</label>
+			<label class="field">
+				<span>Color</span>
+				<select id="accent">
+					<option value="teal" selected>Teal</option>
+					<option value="navy">Navy blue</option>
+					<option value="black">Black</option>
+				</select>
+			</label>
+		</div>
+
+		<h2 class="form-section">Preview</h2>
+	</div>
+
+	<div class="doc" id="doc" aria-label="CV preview"></div>
+
+	<div class="actions no-print">
+		<button type="button" class="btn" id="print-btn">Print or save as PDF</button>
+	</div>
+</ToolPage>
+
+<script>
+	import '../scripts/cv-builder';
+</script>

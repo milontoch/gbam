@@ -1,0 +1,146 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import '../styles/document.css';
+
+const steps = [
+	'Choose Invoice or Receipt, then fill in your business details and your customer\'s details.',
+	'Add each item with its quantity and price. Totals are worked out for you.',
+	'Check the preview, then press "Print or save as PDF". In the print window, choose "Save as PDF" as the printer.',
+];
+
+const faq = [
+	{
+		q: 'Is my invoice information uploaded anywhere?',
+		a: 'No. Everything you type stays in your browser and disappears when you close or refresh the page. Gbam does not receive it and cannot see it.',
+	},
+	{
+		q: 'How do I get a PDF on my phone?',
+		a: 'Press "Print or save as PDF". On Android Chrome, choose "Save as PDF" as the printer, then tap the PDF button. On iPhone, pinch outward on the small preview to open it, then tap the share icon and choose "Save to Files".',
+	},
+	{
+		q: 'Can I use Naira and other currencies?',
+		a: 'Yes. Naira (₦) is the default. You can also choose US dollars, pounds, euros, Ghana cedis, Kenyan shillings and South African rand.',
+	},
+	{
+		q: 'What is the VAT button for?',
+		a: 'It fills in 7.5%, the standard VAT rate in Nigeria. Only add tax if your business is registered to charge it. Check with a tax professional if you are unsure.',
+	},
+	{
+		q: 'Is this a legal tax invoice?',
+		a: 'Gbam makes a clean, professional document. Whether it meets the rules for your business or country is your responsibility, so check with your accountant or tax authority if you need a formal tax invoice.',
+	},
+	{
+		q: 'Can I save my details for next time?',
+		a: 'Not yet. Nothing is stored, which keeps your information private. Save the PDF, or keep a copy of your details in your notes app.',
+	},
+];
+---
+
+<ToolPage
+	slug="invoice-generator"
+	intro="Fill in the form, check the preview, and save a clean invoice or receipt as PDF. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<div class="no-print">
+		<div class="form-grid">
+			<label class="field">
+				<span>Document type</span>
+				<select id="type">
+					<option value="invoice" selected>Invoice (asking for payment)</option>
+					<option value="receipt">Receipt (payment received)</option>
+				</select>
+			</label>
+			<label class="field">
+				<span>Currency</span>
+				<select id="currency">
+					<option value="NGN" selected>Naira (₦)</option>
+					<option value="USD">US dollar ($)</option>
+					<option value="GBP">Pound (£)</option>
+					<option value="EUR">Euro (€)</option>
+					<option value="GHS">Ghana cedi (GH₵)</option>
+					<option value="KES">Kenyan shilling (KSh)</option>
+					<option value="ZAR">South African rand (R)</option>
+				</select>
+			</label>
+		</div>
+
+		<h2 class="form-section">Your business</h2>
+		<div class="form-grid">
+			<label class="field">
+				<span>Business or your name</span>
+				<input type="text" id="biz-name" autocomplete="organization" maxlength="100" />
+			</label>
+			<label class="field">
+				<span>Logo (optional)</span>
+				<input type="file" id="logo" accept="image/png,image/jpeg,image/webp" />
+			</label>
+			<label class="field wide">
+				<span>Address, phone, email</span>
+				<textarea id="biz-details" rows="3" maxlength="500"></textarea>
+			</label>
+		</div>
+		<button type="button" class="btn btn-secondary btn-small hidden" id="clear-logo">Remove logo</button>
+
+		<h2 class="form-section">Customer and details</h2>
+		<div class="form-grid">
+			<label class="field">
+				<span>Customer name</span>
+				<input type="text" id="client-name" maxlength="100" />
+			</label>
+			<label class="field">
+				<span>Invoice or receipt number</span>
+				<input type="text" id="number" placeholder="e.g. INV-001" maxlength="30" />
+			</label>
+			<label class="field wide">
+				<span>Customer address, phone, email</span>
+				<textarea id="client-details" rows="3" maxlength="500"></textarea>
+			</label>
+			<label class="field">
+				<span>Date</span>
+				<input type="date" id="date" />
+			</label>
+			<label class="field" id="due-field">
+				<span>Due date (optional)</span>
+				<input type="date" id="due" />
+			</label>
+		</div>
+
+		<h2 class="form-section">Items</h2>
+		<div id="items"></div>
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="add-item">+ Add item</button>
+		</div>
+
+		<div class="form-grid spaced">
+			<label class="field">
+				<span>Discount (%)</span>
+				<input type="number" id="discount" inputmode="decimal" min="0" max="100" step="any" />
+			</label>
+			<label class="field">
+				<span>Tax or VAT (%)</span>
+				<input type="number" id="tax" inputmode="decimal" min="0" max="100" step="any" />
+			</label>
+			<div>
+				<button type="button" class="btn btn-secondary btn-small" id="vat-btn">Use VAT 7.5%</button>
+			</div>
+			<label class="field wide">
+				<span>Notes and payment details (optional)</span>
+				<textarea id="notes" rows="3" maxlength="800" placeholder="e.g. Bank name, account number, account name. Thank you for your business."></textarea>
+			</label>
+		</div>
+
+		<h2 class="form-section">Preview</h2>
+	</div>
+
+	<div class="doc" id="doc" aria-label="Document preview"></div>
+
+	<div class="actions no-print">
+		<button type="button" class="btn" id="print-btn">Print or save as PDF</button>
+	</div>
+	<p class="status no-print" id="status" role="status" aria-live="polite"></p>
+</ToolPage>
+
+<script>
+	import '../scripts/invoice-generator';
+</script>

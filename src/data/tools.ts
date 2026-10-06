@@ -84,7 +84,7 @@ export const tools: Tool[] = [
 		summary: 'Create a clean invoice or receipt and save it as PDF.',
 		badge: 'INV',
 		category: 'Documents',
-		live: false,
+		live: true,
 		metaTitle: 'Free Invoice & Receipt Generator | Gbam',
 		metaDescription:
 			'Create professional invoices and receipts in Naira or any currency and download them as PDF. Free, no sign-up, and nothing is uploaded.',
@@ -96,7 +96,7 @@ export const tools: Tool[] = [
 		summary: 'Build a neat CV and download it as PDF.',
 		badge: 'CV',
 		category: 'Documents',
-		live: false,
+		live: true,
 		metaTitle: 'Free CV Builder – Make a CV and Download PDF | Gbam',
 		metaDescription:
 			'Build a clean, professional CV in minutes and download it as PDF. Free, no sign-up, and your details never leave your device.',
@@ -108,7 +108,7 @@ export const tools: Tool[] = [
 		summary: 'Crop to passport size and print several on one sheet.',
 		badge: 'ID',
 		category: 'Image',
-		live: false,
+		live: true,
 		metaTitle: 'Passport Photo Maker – Free & Private | Gbam',
 		metaDescription:
 			'Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.',

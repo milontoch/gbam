@@ -1,0 +1,87 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Take or choose a photo: face the camera, in even light, in front of a plain light wall. Nothing covering your face.',
+	'Choose the photo size you need, then drag the photo and use the zoom slider so your face fills the oval.',
+	'Download the single photo, or make a print sheet with several copies to print at a photo shop.',
+];
+
+const faq = [
+	{
+		q: 'Is my photo uploaded anywhere?',
+		a: 'No. Your photo is cropped inside your browser, on your own device. It is never sent to Gbam or anyone else.',
+	},
+	{
+		q: 'Can you change my photo background to white?',
+		a: 'Not at the moment. Take the photo in front of a plain white or light wall, with light on your face and no shadows behind you. Many shops and photo apps can also do this for you.',
+	},
+	{
+		q: 'What size does Nigeria need?',
+		a: 'For a printed Nigerian passport photo the common size is 35 × 45 mm with a plain white background. For the Nigeria Immigration Service online portal, the photo is usually 600 × 800 pixels and under 2 MB. Rules can change and can differ by office, so confirm with the office or portal you are using.',
+	},
+	{
+		q: 'Will this be accepted for my application?',
+		a: 'Gbam sizes the photo, but we cannot check it against the official rules. Your face position, expression, lighting and background must also meet the requirements, so read the official guidelines for your application before you submit.',
+	},
+	{
+		q: 'How do I print the sheet?',
+		a: 'Save the sheet and take it to a photo shop, or print it at home on photo paper. Print at 100% or "actual size". If you choose "fit to page", the photos will come out the wrong size.',
+	},
+];
+---
+
+<ToolPage
+	slug="passport-photo-maker"
+	intro="Crop your photo to passport size and make a print sheet with several copies. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="image/jpeg,image/png,image/webp" title="Tap to choose a photo" />
+
+	<div id="editor" class="hidden">
+		<label class="field spaced">
+			<span>Photo size</span>
+			<select id="preset">
+				<option value="print-35x45" selected>Nigeria, UK, Schengen: 35 × 45 mm (print)</option>
+				<option value="nigeria-online">Nigeria online upload: 600 × 800 px</option>
+				<option value="us-2x2">USA: 2 × 2 in (51 × 51 mm)</option>
+				<option value="canada-50x70">Canada: 50 × 70 mm</option>
+			</select>
+		</label>
+
+		<div class="crop-wrap">
+			<canvas id="crop" tabindex="0" aria-label="Photo position. Drag, or use the arrow keys, to move the photo."></canvas>
+			<div class="face-guide" aria-hidden="true"></div>
+		</div>
+		<p class="muted crop-hint">Drag the photo to place your face inside the oval.</p>
+
+		<label class="field">
+			<span>Zoom</span>
+			<input type="range" id="zoom" min="1" max="4" step="0.05" value="1" />
+		</label>
+
+		<div class="actions">
+			<button type="button" class="btn" id="photo-btn">Download photo</button>
+		</div>
+
+		<div id="sheet-box" class="spaced">
+			<label class="field">
+				<span>Print sheet paper</span>
+				<select id="paper">
+					<option value="4x6" selected>4 × 6 in (standard photo print)</option>
+					<option value="a4">A4</option>
+				</select>
+			</label>
+			<button type="button" class="btn btn-secondary" id="sheet-btn">Make print sheet</button>
+		</div>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/passport-photo-maker';
+</script>

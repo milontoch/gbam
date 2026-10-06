@@ -56,6 +56,22 @@ export function urlKeeper() {
 	};
 }
 
+// Tiny element builder. Text always goes in via textContent, so user input can never become HTML.
+export function h<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
+	const el = document.createElement(tag);
+	if (className) el.className = className;
+	if (text !== undefined) el.textContent = text;
+	return el;
+}
+
+// Browsers use the page title as the default file name in "Save as PDF", so set a good one while printing.
+export function printAs(title: string) {
+	const original = document.title;
+	document.title = title.replace(/[^\w\- ]+/g, '').trim() || original;
+	window.addEventListener('afterprint', () => (document.title = original), { once: true });
+	window.print();
+}
+
 export function baseName(filename: string, fallback = 'file') {
 	return filename.replace(/\.[^.]+$/, '') || fallback;
 }
