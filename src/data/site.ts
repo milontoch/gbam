@@ -6,5 +6,5 @@ export const site = {
 	updated: '6 October 2026', // update this whenever you change the Privacy or Terms text
 	country: 'Nigeria',
 	// Paste the content value from Google Search Console's "HTML tag" verification here (Milestone 7 steps).
-	googleVerification: 'pVpMeEqfCqPecL8TeQK8CnkIQxcsolsyUxuQkLwbEBk',
+	googleVerification: '5es2Ulqjizqwq18P80p4w1mgq2woirWhEx3THA2XEdw',
 };
