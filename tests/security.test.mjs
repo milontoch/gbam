@@ -26,6 +26,7 @@ async function strictPage(t, route, width = 375) {
 	const rules = parseHeaders();
 	const context = await t.browser.newContext({ viewport: { width, height: 800 }, acceptDownloads: true });
 	await context.route('**/*', async (r) => {
+		try {
 		const url = new URL(r.request().url());
 		if (url.origin !== BASE) return r.continue();
 		if (url.pathname === '/_astro/__evaltest.js') {
@@ -37,6 +38,9 @@ async function strictPage(t, route, width = 375) {
 		const extra = {};
 		for (const rule of rules) if (matches(rule.pattern, url.pathname)) Object.assign(extra, rule.headers);
 		await r.fulfill({ response: res, headers: { ...res.headers(), ...extra } });
+		} catch {
+			// the test finished and closed the window while this request was still in flight: nothing to do
+		}
 	});
 	const page = await context.newPage();
 	page.violations = [];
