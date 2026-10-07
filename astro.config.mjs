@@ -1,9 +1,9 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Change `site` to your own domain once you buy one.
+// Your live address. Change `site` to your own domain once you buy one.
 export default defineConfig({
-	site: 'https://gbam.pages.dev',
+	site: 'https://gbam.bematthew164.workers.dev',
 	// /merge-pdf is built as merge-pdf.html; Cloudflare serves it without ".html".
 	build: {
 		format: 'file',

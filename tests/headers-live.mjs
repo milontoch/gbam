@@ -1,5 +1,5 @@
 // Checks that the deployed site really sends the security headers.
-//   node tests/headers-live.mjs https://gbam.pages.dev
+//   node tests/headers-live.mjs https://your-live-address
 const base = (process.argv[2] || '').replace(/\/$/, '');
 if (!base) {
 	console.error('Usage: node tests/headers-live.mjs https://your-site');
@@ -35,6 +35,11 @@ for (const a of assets.slice(0, 3)) {
 const wasm = await fetch(base + '/compress-image').then(() => null);
 void wasm;
 const http = await fetch(base.replace('https://', 'http://') + '/', { redirect: 'manual' }).catch(() => null);
-if (http) check('plain http redirects to https', [301, 302, 307, 308].includes(http.status) && (http.headers.get('location') || '').startsWith('https://'), String(http.status));
+if (http) {
+	const redirects = [301, 302, 307, 308].includes(http.status) && (http.headers.get('location') || '').startsWith('https://');
+	// A warning, not a failure: on free *.workers.dev addresses you cannot switch on "Always Use HTTPS".
+	// On your own domain, turn that setting on in the Cloudflare dashboard (SSL/TLS > Edge Certificates).
+	console.log(redirects ? 'PASS  plain http redirects to https' : `WARN  plain http is served without redirecting to https [${http.status}]`);
+}
 console.log(failed ? `\n${failed} problem(s)` : '\nAll good');
 process.exit(failed ? 1 : 0);

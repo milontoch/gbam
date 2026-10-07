@@ -229,7 +229,7 @@ aiBtn.addEventListener('click', async () => {
 	}
 	const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
 	const slow = conn?.saveData || /(^|-)(2g|3g)$/.test(conn?.effectiveType ?? '');
-	if (slow && !person && !window.confirm('The first time, this downloads about 9 MB. Continue?')) return;
+	if (slow && !person && !window.confirm('The first time, this downloads about 10 MB. Continue?')) return;
 
 	const myGen = generation;
 	const target = work;

@@ -2,7 +2,7 @@
 //   npm run test:e2e                 everything except the slow-network test
 //   npm run test:e2e -- --only=pdf   one suite (pages, images, pdf, docs, passport, security, slow)
 //   npm run test:e2e -- --slow       also run the slow-network suite (adds a minute or two)
-//   BASE_URL=https://gbam.pages.dev node tests/run.mjs   run against the live site
+//   BASE_URL=https://your-live-address node tests/run.mjs   run against the live site
 import { spawn } from 'node:child_process';
 import { launch, Report, BASE } from './lib.mjs';
 
@@ -12,7 +12,7 @@ const withSlow = args.includes('--slow') || only === 'slow';
 const suites = ['pages', 'images', 'pdf', 'docs', 'passport', 'security', ...(withSlow ? ['slow'] : [])].filter((s) => !only || s === only);
 
 const port = new URL(BASE).port || '4399';
-// With BASE_URL set (for example https://gbam.pages.dev) the tests run against that live site instead.
+// With BASE_URL set (for example https://your-live-address) the tests run against that live site instead.
 const server = process.env.BASE_URL ? null : spawn('npx', ['astro', 'preview', '--port', port], { stdio: 'ignore' });
 const stop = () => server?.kill();
 process.on('exit', stop);
