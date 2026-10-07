@@ -35,6 +35,9 @@ export async function open(t, path, opts = {}) {
 		deviceScaleFactor: opts.dpr ?? 1,
 		acceptDownloads: true,
 	});
+	// The only outside host the site may ever contact is Cloudflare's cookie-free analytics.
+	// Tests block it, so they never send fake visits, and every other outside request still fails the test.
+	await context.route(/cloudflareinsights\.com/, (r) => r.abort());
 	const page = await context.newPage();
 	page.log = { errors: [], requests: [] };
 	page.on('pageerror', (e) => page.log.errors.push(e.message));
@@ -47,9 +50,10 @@ export async function open(t, path, opts = {}) {
 // Called when a test is finished with a page. Enforces the privacy promises on every page we test.
 export async function finish(t, page, label) {
 	const { requests, errors } = page.log;
-	const leaving = requests.filter((r) => !r.url.startsWith(BASE) && !/^(blob|data):/.test(r.url));
+	const analytics = /^https:\/\/(static\.)?cloudflareinsights\.com\//;
+	const leaving = requests.filter((r) => !r.url.startsWith(BASE) && !/^(blob|data):/.test(r.url) && !analytics.test(r.url));
 	t.check(`${label}: no request leaves the site`, leaving.length === 0, leaving.map((r) => r.url).join(' '));
-	const writes = requests.filter((r) => !['GET', 'HEAD'].includes(r.method) && !/^(blob|data):/.test(r.url));
+	const writes = requests.filter((r) => !['GET', 'HEAD'].includes(r.method) && !/^(blob|data):/.test(r.url) && !analytics.test(r.url));
 	t.check(`${label}: nothing is uploaded (GET only)`, writes.length === 0, writes.map((r) => r.method + ' ' + r.url).join(' '));
 	const cookies = await page.context().cookies();
 	t.check(`${label}: no cookies set`, cookies.length === 0, cookies.map((c) => c.name).join(','));
