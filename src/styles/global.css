@@ -1,8 +1,8 @@
-/* Gbam design system. Change a token here and the whole site follows. */
+/* Handy design system. Change a token here and the whole site follows. */
 :root {
-	--brand: #0f766e;
-	--brand-dark: #115e59;
-	--brand-tint: #f0fdfa;
+	--brand: #047857;
+	--brand-dark: #065f46;
+	--brand-tint: #ecfdf5;
 	--ink: #0f172a;
 	--muted: #475569;
 	--line: #e2e8f0;
@@ -122,11 +122,14 @@ p {
 }
 
 .logo {
-	font-weight: 800;
-	font-size: 1.35rem;
-	color: var(--brand);
-	text-decoration: none;
-	letter-spacing: -0.02em;
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+}
+
+.logo img {
+	height: 2rem;
+	width: auto;
 }
 
 .menu-button {
@@ -364,7 +367,7 @@ a.card:hover {
 	padding: 0.75rem 1rem;
 	border-radius: var(--radius);
 	background: var(--brand-tint);
-	border: 1px solid #99f6e4;
+	border: 1px solid #a7f3d0;
 	color: var(--brand-dark);
 	font-size: 0.95rem;
 	margin: 1rem 0 1.5rem;

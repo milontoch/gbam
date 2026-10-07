@@ -25,7 +25,7 @@ export const tools: Tool[] = [
 		badge: 'IMG',
 		category: 'Image',
 		live: true,
-		metaTitle: 'Compress Image Online – Free & Private | Gbam',
+		metaTitle: 'Compress Image Online – Free & Private | Handy',
 		metaDescription:
 			'Reduce JPG, PNG and WebP file size right in your browser. Free, no sign-up, and your photos never leave your device.',
 	},
@@ -37,7 +37,7 @@ export const tools: Tool[] = [
 		badge: 'IMG',
 		category: 'Image',
 		live: true,
-		metaTitle: 'Resize Image Online – Free & Private | Gbam',
+		metaTitle: 'Resize Image Online – Free & Private | Handy',
 		metaDescription:
 			'Resize photos to any width and height in your browser. Free, no sign-up, and your images never leave your device.',
 	},
@@ -49,7 +49,7 @@ export const tools: Tool[] = [
 		badge: 'PDF',
 		category: 'PDF',
 		live: true,
-		metaTitle: 'Merge PDF Files Online – Free & Private | Gbam',
+		metaTitle: 'Merge PDF Files Online – Free & Private | Handy',
 		metaDescription:
 			'Combine multiple PDF files into one in your browser. Free, no sign-up, and your documents never leave your device.',
 	},
@@ -61,7 +61,7 @@ export const tools: Tool[] = [
 		badge: 'PDF',
 		category: 'PDF',
 		live: true,
-		metaTitle: 'Split PDF Online – Free & Private | Gbam',
+		metaTitle: 'Split PDF Online – Free & Private | Handy',
 		metaDescription:
 			'Extract pages or split a PDF into separate files in your browser. Free, and your documents never leave your device.',
 	},
@@ -73,7 +73,7 @@ export const tools: Tool[] = [
 		badge: 'PDF',
 		category: 'PDF',
 		live: false,
-		metaTitle: 'Compress PDF Online – Free & Private | Gbam',
+		metaTitle: 'Compress PDF Online – Free & Private | Handy',
 		metaDescription:
 			'Make scanned PDFs smaller for job portals and email, right in your browser. Free, and your files never leave your device.',
 	},
@@ -85,7 +85,7 @@ export const tools: Tool[] = [
 		badge: 'INV',
 		category: 'Documents',
 		live: true,
-		metaTitle: 'Free Invoice & Receipt Generator | Gbam',
+		metaTitle: 'Free Invoice & Receipt Generator | Handy',
 		metaDescription:
 			'Create professional invoices and receipts in Naira or any currency and download them as PDF. Free, no sign-up, and nothing is uploaded.',
 	},
@@ -97,7 +97,7 @@ export const tools: Tool[] = [
 		badge: 'CV',
 		category: 'Documents',
 		live: true,
-		metaTitle: 'Free CV Builder – Make a CV and Download PDF | Gbam',
+		metaTitle: 'Free CV Builder – Make a CV and Download PDF | Handy',
 		metaDescription:
 			'Build a clean, professional CV in minutes and download it as PDF. Free, no sign-up, and your details never leave your device.',
 	},
@@ -109,7 +109,7 @@ export const tools: Tool[] = [
 		badge: 'ID',
 		category: 'Image',
 		live: true,
-		metaTitle: 'Passport Photo Maker – Free & Private | Gbam',
+		metaTitle: 'Passport Photo Maker – Free & Private | Handy',
 		metaDescription:
 			'Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.',
 	},

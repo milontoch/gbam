@@ -1,6 +1,6 @@
 /* Styles for printable documents (invoice, CV). Used by elements built in the browser. */
 .doc {
-	--doc-accent: #0f766e;
+	--doc-accent: #047857;
 	background: #fff;
 	color: #111827;
 	border: 1px solid var(--line);

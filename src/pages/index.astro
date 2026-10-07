@@ -8,14 +8,14 @@ const home = new URL('/', Astro.site).href;
 const siteLd = JSON.stringify({
 	'@context': 'https://schema.org',
 	'@graph': [
-		{ '@type': 'WebSite', '@id': `${home}#website`, url: home, name: 'Gbam', inLanguage: 'en' },
-		{ '@type': 'Organization', '@id': `${home}#org`, name: 'Gbam', url: home, logo: new URL('/apple-touch-icon.png', Astro.site).href },
+		{ '@type': 'WebSite', '@id': `${home}#website`, url: home, name: 'Handy', inLanguage: 'en' },
+		{ '@type': 'Organization', '@id': `${home}#org`, name: 'Handy', url: home, logo: new URL('/apple-touch-icon.png', Astro.site).href },
 	],
 }).replace(/</g, '\\u003c');
 ---
 
 <Base
-	title="Gbam – Free Online Tools That Keep Your Files Private"
+	title="Handy – Free Online Tools That Keep Your Files Private"
 	description="Free tools for PDFs, images, invoices and CVs. Everything runs in your browser, so your files never leave your device."
 >
 	<Fragment slot="head">
@@ -43,9 +43,9 @@ const siteLd = JSON.stringify({
 		</section>
 
 		<section class="prose">
-			<h2>Why Gbam?</h2>
+			<h2>Why Handy?</h2>
 			<p>
-				Most free online tools upload your files to a server you know nothing about. Gbam does the work inside your
+				Most free online tools upload your files to a server you know nothing about. Handy does the work inside your
 				own browser, so your documents, photos and details stay on your phone or computer.
 			</p>
 			<p>It is free to use, needs no account, and is built to stay fast on slow connections.</p>

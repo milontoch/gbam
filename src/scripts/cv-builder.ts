@@ -23,7 +23,7 @@ const printBtn = byId<HTMLButtonElement>('print-btn');
 const jobs: Job[] = [{ role: '', company: '', dates: '', details: '' }];
 const schools: School[] = [{ school: '', award: '', dates: '', details: '' }];
 
-const ACCENTS: Record<string, string> = { teal: '#0f766e', navy: '#1e3a8a', black: '#111827' };
+const ACCENTS: Record<string, string> = { green: '#047857', navy: '#1e3a8a', black: '#111827' };
 
 const lines = (text: string) =>
 	text
@@ -53,7 +53,7 @@ function entry(title: string, subtitle: string, dates: string, details: string):
 }
 
 function render() {
-	doc.style.setProperty('--doc-accent', ACCENTS[f.accent.value] ?? ACCENTS.teal);
+	doc.style.setProperty('--doc-accent', ACCENTS[f.accent.value] ?? ACCENTS.green);
 	doc.replaceChildren();
 
 	// header

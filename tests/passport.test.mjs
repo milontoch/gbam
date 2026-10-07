@@ -10,7 +10,7 @@ const PORTRAIT = path.join(os.tmpdir(), 'gbam-test-portrait.jpg');
 async function portrait() {
 	if (fs.existsSync(PORTRAIT) && fs.statSync(PORTRAIT).size > 100_000) return PORTRAIT;
 	try {
-		const res = await fetch(PORTRAIT_URL, { headers: { 'User-Agent': 'GbamTests/1.0 (local development)' } });
+		const res = await fetch(PORTRAIT_URL, { headers: { 'User-Agent': 'HandyTests/1.0 (local development)' } });
 		if (!res.ok) return null;
 		fs.writeFileSync(PORTRAIT, Buffer.from(await res.arrayBuffer()));
 		return PORTRAIT;
