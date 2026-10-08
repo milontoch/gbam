@@ -28,6 +28,7 @@ async function strictPage(t, route, width = 375) {
 	await context.route('**/*', async (r) => {
 		try {
 		const url = new URL(r.request().url());
+		if (/cloudflareinsights\.com$/.test(url.hostname)) return r.abort(); // never send test visits to the real dashboard
 		if (url.origin !== BASE) return r.continue();
 		if (url.pathname === '/_astro/__evaltest.js') {
 			// a script that lives on our own site (so it is allowed to run) and tries eval()
@@ -45,9 +46,11 @@ async function strictPage(t, route, width = 375) {
 	const page = await context.newPage();
 	page.violations = [];
 	page.errors = [];
+	page.requested = [];
+	page.on('request', (r) => page.requested.push(r.url()));
 	page.on('pageerror', (e) => page.errors.push(e.message));
 	page.on('console', (m) => {
-		if (m.type() === 'error') page.errors.push(m.text());
+		if (m.type() === 'error' && !/cloudflareinsights\.com/.test(m.location().url || '')) page.errors.push(m.text());
 	});
 	await page.addInitScript(() => {
 		window.__csp = [];
@@ -99,6 +102,15 @@ export default async function (t) {
 		t.check('CSP blocks sending data to another website', result.upload === 'blocked', result.upload);
 		t.check('CSP blocks images from other websites', result.thirdPartyImage === 'blocked', result.thirdPartyImage);
 		t.check('CSP violations were reported for those attempts', (await violations(page)).length >= 3);
+		const html = await (await fetch(BASE + '/')).text();
+		if (html.includes('static.cloudflareinsights.com')) {
+			// The one outside script we allow must actually be permitted by the policy (it is blocked at the network, not by CSP).
+			const asked = page.requested.some((u) => u.startsWith('https://static.cloudflareinsights.com/beacon.min.js'));
+			// look at what the browser actually refused to load (its blocked address), not at words in a message
+			const events = await page.evaluate(() => window.__csp);
+			const blocked = events.filter((v) => /\scloudflareinsights|\shttps:\/\/(static\.)?cloudflareinsights/.test(v));
+			t.check('CSP allows the analytics script (and nothing else outside)', asked && blocked.length === 0, blocked.join(' | '));
+		}
 		await page.context().close();
 	}
 
