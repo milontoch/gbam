@@ -97,7 +97,7 @@ async function lockedPdf() {
 async function runTool(t, file, { max = false, level, target, route = '/compress-pdf' } = {}) {
 	const page = await open(t, route);
 	await page.setInputFiles('#file-input', file);
-	await page.waitForSelector('#editor:not(.hidden), #status.error', { timeout: 30000 });
+	await page.waitForSelector('#editor:not(.hidden), #status.error', { timeout: 90000 }); // generous: live networks vary
 	if (await page.isHidden('#editor')) return { page, ok: false };
 	if (max) await page.check('#method-max');
 	if (level !== undefined) await page.selectOption('#level', String(level));
