@@ -75,7 +75,7 @@ export default async function (t) {
 
 		const many = Array.from({ length: 25 }, (_, i) => ({ name: `p${i}.png`, mimeType: 'image/png', buffer: Buffer.from(huge.subarray(0, 0)) }));
 		const tiny = await makeImage(page, { w: 50, h: 50, type: 'image/png' });
-		await page.setInputFiles('#file-input', many.map((f, i) => ({ ...f, buffer: tiny })));
+		await page.setInputFiles('#file-input', many.map((f) => ({ ...f, buffer: tiny })));
 		await page.waitForFunction(() => /^(Done|No files)/.test(document.getElementById('status').textContent), null, { timeout: 60000 });
 		t.check('compress: more than 20 files are cut to 20', (await page.$$('#results li')).length === 20, String((await page.$$('#results li')).length));
 		await finish(t, page, 'compress-large');

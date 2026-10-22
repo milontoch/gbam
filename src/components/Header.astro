@@ -1,9 +1,11 @@
 ---
 import { liveTools } from '../data/tools';
 import { cleanPath } from '../utils/path';
+import { getGuides } from '../data/guides';
 
 const path = cleanPath(Astro.url.pathname);
 const tools = liveTools();
+const hasGuides = (await getGuides()).length > 0;
 ---
 
 <header class="site-header">
@@ -32,6 +34,9 @@ const tools = liveTools();
 			</ul>
 			{tools.length > 0 && <p class="nav-heading">More</p>}
 			<ul>
+				{hasGuides && (
+					<li><a href="/guides" aria-current={path === '/guides' || path.startsWith('/guides/') ? 'page' : undefined}>Guides</a></li>
+				)}
 				<li><a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a></li>
 				<li><a href="/contact" aria-current={path === '/contact' ? 'page' : undefined}>Contact</a></li>
 			</ul>

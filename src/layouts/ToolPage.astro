@@ -5,6 +5,7 @@ import Base from './Base.astro';
 import PrivacyBadge from '../components/PrivacyBadge.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { getTool, liveTools } from '../data/tools';
+import { getGuides, guideUrl } from '../data/guides';
 
 interface Props {
 	slug: string;
@@ -15,6 +16,7 @@ interface Props {
 
 const { slug, intro, steps, faq } = Astro.props;
 const tool = getTool(slug);
+const toolGuides = (await getGuides()).filter((g) => g.data.tool === slug);
 const related = liveTools()
 	.filter((t) => t.slug !== slug)
 	.slice(0, 4);
@@ -88,6 +90,21 @@ const ld = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
 				))
 			}
 		</section>
+
+		{
+			toolGuides.length > 0 && (
+				<section class="prose">
+					<h2>Guides</h2>
+					<ul>
+						{toolGuides.map((g) => (
+							<li>
+								<a href={guideUrl(g)}>{g.data.title}</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)
+		}
 
 		{
 			related.length > 0 && (

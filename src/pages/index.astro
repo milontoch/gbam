@@ -3,6 +3,9 @@ import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
 import PrivacyBadge from '../components/PrivacyBadge.astro';
 import { tools } from '../data/tools';
+import { getGuides, guideUrl } from '../data/guides';
+
+const latestGuides = (await getGuides()).slice(0, 3);
 
 const home = new URL('/', Astro.site).href;
 const siteLd = JSON.stringify({
@@ -41,6 +44,24 @@ const siteLd = JSON.stringify({
 				}
 			</ul>
 		</section>
+
+		{
+			latestGuides.length > 0 && (
+				<section class="prose">
+					<h2>Latest guides</h2>
+					<ul>
+						{latestGuides.map((g) => (
+							<li>
+								<a href={guideUrl(g)}>{g.data.title}</a>
+							</li>
+						))}
+					</ul>
+					<p>
+						<a href="/guides">All guides</a>
+					</p>
+				</section>
+			)
+		}
 
 		<section class="prose">
 			<h2>Why Handy?</h2>

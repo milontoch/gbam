@@ -734,3 +734,82 @@ progress {
 .page li {
 	margin-bottom: 0.4rem;
 }
+
+/* Guides */
+.crumbs {
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
+	color: var(--muted);
+}
+
+.guide-meta {
+	margin-bottom: 1.5rem;
+}
+
+.guide h2 {
+	margin-top: 2rem;
+}
+
+.guide ol,
+.guide ul {
+	padding-left: 1.25rem;
+}
+
+.guide li {
+	margin-bottom: 0.4rem;
+}
+
+.guide table {
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin: 1rem 0;
+	max-width: 100%;
+}
+
+.guide th,
+.guide td {
+	border: 1px solid var(--line);
+	padding: 0.4rem 0.7rem;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.guide th {
+	background: var(--surface);
+}
+
+.guide blockquote {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+	border-left: 4px solid var(--brand);
+	background: var(--brand-tint);
+}
+
+.guide blockquote p {
+	margin: 0.25rem 0;
+}
+
+.try-tool .card {
+	margin-top: 0.5rem;
+}
+
+.guide-list {
+	list-style: none;
+	padding: 0;
+	margin: 1.5rem 0 0;
+}
+
+.guide-list li {
+	padding: 1rem 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.guide-list h2 {
+	margin: 0 0 0.25rem;
+	font-size: 1.2rem;
+}
+
+.guide-list p {
+	margin: 0.25rem 0;
+}

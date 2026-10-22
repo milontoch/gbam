@@ -1,0 +1,40 @@
+---
+// This one file builds exactly one page, /guides, and only when at least one guide is published.
+// With no guides there is no /guides page at all (an empty page would look thin to Google).
+import Page from '../layouts/Page.astro';
+import { getGuides, guideUrl, longDate, readingMinutes } from '../data/guides';
+import { tools } from '../data/tools';
+
+export async function getStaticPaths() {
+	const guides = await getGuides();
+	return guides.length > 0 ? [{ params: { section: 'guides' } }] : [];
+}
+
+const guides = await getGuides();
+const toolName = (slug?: string) => tools.find((t) => t.slug === slug)?.name;
+---
+
+<Page
+	title="Guides: How to Compress, Merge and Prepare Files | Handy"
+	description="Plain-language, step-by-step guides for everyday file jobs: shrinking photos, merging PDFs, making CVs and invoices."
+	heading="Guides"
+>
+	<p>Short, practical how-tos for the jobs people use these tools for. Each guide is checked before it is published and shows when it was last updated.</p>
+
+	<ul class="guide-list">
+		{
+			guides.map((g) => (
+				<li>
+					<h2>
+						<a href={guideUrl(g)}>{g.data.title}</a>
+					</h2>
+					<p>{g.data.description}</p>
+					<p class="muted">
+						Updated {longDate(g.data.updated)} · {readingMinutes(g)} min read
+						{toolName(g.data.tool) && <> · Tool: {toolName(g.data.tool)}</>}
+					</p>
+				</li>
+			))
+		}
+	</ul>
+</Page>
