@@ -21,7 +21,7 @@ Browser tests live in `tests/`. They need Google Chrome (set `CHROME_PATH` if it
 |---|---|
 | `npm run test:e2e` | Builds the site, then runs every suite (about 3 minutes) |
 | `npm run test:e2e -- --slow` | Also runs the slow-network suite |
-| `node tests/run.mjs --only=pdf` | One suite only: `pages`, `seo`, `images`, `pdf`, `docs`, `passport`, `security`, `slow` (build first) |
+| `node tests/run.mjs --only=pdf` | One suite only: `pages`, `seo`, `images`, `pdf`, `pdfcompress`, `docs`, `passport`, `security`, `slow` (build first) |
 | `npm run check` | Type-checks the project |
 | `npm run seo:baseline` | Re-records the SEO reference (page addresses, titles, headings, structured data). Do this only after checking that the changes are intended |
 

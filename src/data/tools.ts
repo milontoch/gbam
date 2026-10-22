@@ -72,7 +72,7 @@ export const tools: Tool[] = [
 		summary: 'Shrink scanned PDFs for portals and email.',
 		badge: 'PDF',
 		category: 'PDF',
-		live: false,
+		live: true,
 		metaTitle: 'Compress PDF Online – Free & Private | Handy',
 		metaDescription:
 			'Make scanned PDFs smaller for job portals and email, right in your browser. Free, and your files never leave your device.',

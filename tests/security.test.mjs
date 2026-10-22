@@ -163,6 +163,20 @@ export default async function (t) {
 			await page.selectOption('#accent', 'navy');
 			t.check('cv-builder works under CSP (dynamic colour)', (await page.textContent('#doc')).includes('Test Person'));
 		}],
+		['/compress-pdf', async (page) => {
+			const jpg = await makeImage(page, { w: 1600, h: 1200, quality: 0.9, noise: true });
+			const d = await PDFDocument.create();
+			const img = await d.embedJpg(jpg);
+			d.addPage([595, 842]).drawImage(img, { x: 0, y: 0, width: 595, height: 446 });
+			await page.setInputFiles('#file-input', pdf('scan.pdf', Buffer.from(await d.save())));
+			await page.waitForSelector('#editor:not(.hidden)');
+			await page.click('#go-btn');
+			await page.waitForSelector('#results a', { timeout: 60000 });
+			await page.check('#method-max'); // this one loads the pdf.js worker and decoders
+			await page.click('#go-btn');
+			await page.waitForFunction(() => /cannot be selected/.test(document.querySelector('#results .result-detail')?.textContent || ''), null, { timeout: 90000 });
+			t.check('compress-pdf works under CSP (both methods, with the pdf.js worker)', true);
+		}],
 		['/passport-photo-maker', async (page) => {
 			const img = await makeImage(page, { w: 1500, h: 2000, quality: 0.9 });
 			await page.setInputFiles('#file-input', { name: 'p.jpg', mimeType: 'image/jpeg', buffer: img });

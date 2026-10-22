@@ -1,0 +1,96 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose a PDF. A scanned document or a PDF made from photos will shrink the most.',
+	'Leave "Keep text" selected and press Compress. If you need a specific size, type it in the box, for example 500 for 500 KB.',
+	'Look at the result, then press Download. If it did not get small enough, try "Maximum" compression.',
+];
+
+const faq = [
+	{
+		q: 'Is my PDF uploaded anywhere?',
+		a: 'No. Everything happens inside your browser, on your own device. Your document is never sent to Handy or anyone else.',
+	},
+	{
+		q: 'Which method should I choose?',
+		a: '"Keep text" is the default and the gentler choice. It makes the big pictures inside the PDF smaller and leaves everything else as it was, so you can still select and search the text. "Maximum" turns every page into a picture, which usually makes the file much smaller but means the text can no longer be selected or searched.',
+	},
+	{
+		q: 'Why did "Keep text" not shrink my PDF?',
+		a: 'It only helps when the PDF contains large pictures, for example a scanned certificate or photos saved as PDF. A PDF made mostly of text and drawings is already small, and there is little to shrink. In that case "Maximum" may help, but it may not either.',
+	},
+	{
+		q: 'How does the size target work?',
+		a: 'If you type a size, the tool tries stronger and stronger settings, one after another, until the file is under that size. If it cannot get there, it gives you the smallest result it managed and tells you so.',
+	},
+	{
+		q: 'Will the quality be good enough?',
+		a: 'It depends on the level. "Light" suits printing and "Balanced" suits most uses. "Strong" and the extra settings used by the size target are for reading on a screen and uploading to portals. Always open the result and check that the text is readable before you send it.',
+	},
+	{
+		q: 'Why does it say my PDF is password-protected?',
+		a: 'Locked PDFs cannot be compressed. Remove the password using the app you normally use, save a copy, and add that copy here.',
+	},
+	{
+		q: 'Will you ever give me a bigger file?',
+		a: 'No. If the result is not clearly smaller than your original, we tell you and leave your original alone.',
+	},
+];
+---
+
+<ToolPage
+	slug="compress-pdf"
+	intro="Make a PDF smaller for job portals, school forms and email, without uploading it anywhere. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="application/pdf,.pdf" title="Tap to choose a PDF file" />
+
+	<div id="editor" class="hidden">
+		<p class="muted" id="file-info"></p>
+
+		<label class="choice">
+			<input type="radio" name="method" id="method-keep" checked />
+			<span>Keep text (recommended): shrink the pictures inside</span>
+		</label>
+		<label class="choice">
+			<input type="radio" name="method" id="method-max" />
+			<span>Maximum: turn pages into pictures (text can't be selected)</span>
+		</label>
+
+		<div class="options spaced">
+			<label class="field">
+				<span>How strong</span>
+				<select id="level">
+					<option value="0">Light (best quality)</option>
+					<option value="1" selected>Balanced</option>
+					<option value="2">Strong (smallest)</option>
+				</select>
+			</label>
+			<label class="field">
+				<span>Make it under (optional)</span>
+				<input type="number" id="target-kb" inputmode="numeric" min="10" step="10" placeholder="KB, for example 500" />
+			</label>
+		</div>
+
+		<div class="actions">
+			<button type="button" class="btn" id="go-btn">Compress</button>
+			<button type="button" class="btn btn-secondary hidden" id="cancel-btn">Cancel</button>
+		</div>
+		<progress id="progress" class="hidden" max="100" value="0"></progress>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+
+	<div id="next-step" class="hidden spaced">
+		<p id="next-text"></p>
+		<button type="button" class="btn btn-secondary" id="next-btn">Try maximum compression</button>
+	</div>
+</ToolPage>
+
+<script>
+	import '../scripts/compress-pdf';
+</script>

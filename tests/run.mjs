@@ -1,6 +1,6 @@
 // Runs the browser tests against the built site.
 //   npm run test:e2e                 everything except the slow-network test
-//   npm run test:e2e -- --only=pdf   one suite (pages, seo, images, pdf, docs, passport, security, slow)
+//   npm run test:e2e -- --only=pdf   one suite (pages, seo, images, pdf, pdfcompress, docs, passport, security, slow)
 //   npm run test:e2e -- --slow       also run the slow-network suite (adds a minute or two)
 //   BASE_URL=https://your-live-address node tests/run.mjs   run against the live site
 import { spawn } from 'node:child_process';
@@ -9,7 +9,7 @@ import { launch, Report, BASE } from './lib.mjs';
 const args = process.argv.slice(2);
 const only = args.find((a) => a.startsWith('--only='))?.slice(7);
 const withSlow = args.includes('--slow') || only === 'slow';
-const suites = ['pages', 'seo', 'images', 'pdf', 'docs', 'passport', 'security', ...(withSlow ? ['slow'] : [])].filter((s) => !only || s === only);
+const suites = ['pages', 'seo', 'images', 'pdf', 'pdfcompress', 'docs', 'passport', 'security', ...(withSlow ? ['slow'] : [])].filter((s) => !only || s === only);
 
 const port = new URL(BASE).port || '4399';
 // With BASE_URL set (for example https://your-live-address) the tests run against that live site instead.

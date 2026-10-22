@@ -3,6 +3,7 @@
     "/",
     "/about",
     "/compress-image",
+    "/compress-pdf",
     "/contact",
     "/cv-builder",
     "/invoice-generator",
@@ -26,7 +27,7 @@
         "Organization",
         "WebSite"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/about": {
       "status": 200,
@@ -36,7 +37,7 @@
       "canonicalPath": "/about",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/compress-image": {
       "status": 200,
@@ -54,7 +55,25 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
+    },
+    "/compress-pdf": {
+      "status": 200,
+      "title": "Compress PDF Online – Free & Private | Handy",
+      "description": "Make scanned PDFs smaller for job portals and email, right in your browser. Free, and your files never leave your device.",
+      "h1": "Compress PDF Online",
+      "canonicalPath": "/compress-pdf",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 14
     },
     "/contact": {
       "status": 200,
@@ -64,7 +83,7 @@
       "canonicalPath": "/contact",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/cv-builder": {
       "status": 200,
@@ -82,7 +101,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/invoice-generator": {
       "status": 200,
@@ -100,7 +119,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/licenses": {
       "status": 200,
@@ -110,7 +129,7 @@
       "canonicalPath": "/licenses",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/merge-pdf": {
       "status": 200,
@@ -128,7 +147,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/passport-photo-maker": {
       "status": 200,
@@ -146,7 +165,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/privacy": {
       "status": 200,
@@ -156,7 +175,7 @@
       "canonicalPath": "/privacy",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/resize-image": {
       "status": 200,
@@ -174,7 +193,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/split-pdf": {
       "status": 200,
@@ -192,7 +211,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 13
+      "internalLinks": 14
     },
     "/terms": {
       "status": 200,
@@ -202,7 +221,7 @@
       "canonicalPath": "/terms",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 13
+      "internalLinks": 14
     }
   }
 }
