@@ -4,7 +4,7 @@ description: "Combine several PDFs into one on Android or iPhone without install
 tool: merge-pdf
 published: 2026-10-22
 updated: 2026-10-22
-draft: true
+draft: false
 ---
 
 Job portals, school applications and offices often want **one PDF** that holds everything: a certificate, an ID, a letter and a form. If your documents are separate files, you need to join them. You can do that on your phone in a browser, without installing an app and without sending your documents to anyone.

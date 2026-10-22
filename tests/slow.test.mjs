@@ -17,6 +17,7 @@ async function throttledPage(t, profile) {
 		downloadThroughput: (profile.kbps * 1024) / 8,
 		uploadThroughput: (profile.kbps * 1024) / 8,
 	});
+	page.on('dialog', (d) => d.accept());
 	page.bytes = 0;
 	cdp.on('Network.loadingFinished', (e) => (page.bytes += e.encodedDataLength));
 	return { page, context };

@@ -1,6 +1,6 @@
 {
-  "name": "Handy",
-  "short_name": "Handy",
+  "name": "HandyQuill",
+  "short_name": "HandyQuill",
   "description": "Free tools that keep your files private.",
   "start_url": "/",
   "display": "standalone",

@@ -1,4 +1,4 @@
-# Handy
+# HandyQuill
 
 Free browser-based tools for everyday users. Files are processed on the user's device and never uploaded.
 

@@ -10,7 +10,7 @@ const PORTRAIT = path.join(os.tmpdir(), 'gbam-test-portrait.jpg');
 async function portrait() {
 	if (fs.existsSync(PORTRAIT) && fs.statSync(PORTRAIT).size > 100_000) return PORTRAIT;
 	try {
-		const res = await fetch(PORTRAIT_URL, { headers: { 'User-Agent': 'HandyTests/1.0 (local development)' } });
+		const res = await fetch(PORTRAIT_URL, { headers: { 'User-Agent': 'HandyQuillTests/1.0 (local development)' } });
 		if (!res.ok) return null;
 		fs.writeFileSync(PORTRAIT, Buffer.from(await res.arrayBuffer()));
 		return PORTRAIT;
@@ -120,6 +120,41 @@ export default async function (t) {
 		await page.waitForFunction(() => /too large/.test(document.getElementById('status').textContent), null, { timeout: 60000 });
 		t.check('passport: a 54-megapixel photo is refused cleanly', true);
 		await finish(t, page, 'passport-sizes');
+	}
+
+	// ---------------- the data warning on slow connections ----------------
+	{
+		const file = await portrait();
+		if (file) {
+			const slowPhone = async (accept) => {
+				const page = await open(t, '/passport-photo-maker');
+				page.removeAllListeners('dialog'); // this test answers the prompt itself
+				await page.evaluate(() => Object.defineProperty(navigator, 'connection', { value: { effectiveType: '3g', saveData: false }, configurable: true }));
+				const asked = [];
+				page.on('dialog', async (d) => {
+					asked.push(d.message());
+					if (accept) await d.accept();
+					else await d.dismiss();
+				});
+				await page.setInputFiles('#file-input', file);
+				await page.waitForSelector('#editor:not(.hidden)');
+				await page.click('#ai-btn');
+				return { page, asked };
+			};
+
+			const no = await slowPhone(false);
+			await no.page.waitForFunction(() => /Nothing was downloaded/.test(document.getElementById('ai-status').textContent), null, { timeout: 15000 });
+			t.check('AI on a 3G phone: it asks before downloading about 10 MB', no.asked.length === 1 && /10 MB/.test(no.asked[0]), no.asked.join('|'));
+			t.check('AI on a 3G phone: saying no gives a friendly message', true);
+			t.check('AI on a 3G phone: saying no downloads nothing', !no.page.log.requests.some((r) => /onnx|wasm|bg-worker/.test(r.url)));
+			t.check('AI on a 3G phone: the button works again afterwards', !(await no.page.isDisabled('#ai-btn')));
+			await finish(t, no.page, 'passport-ai-declined');
+
+			const yes = await slowPhone(true);
+			await yes.page.waitForFunction(() => /^Done|could not|cannot|stopped/i.test(document.getElementById('ai-status').textContent), null, { timeout: 120000 });
+			t.check('AI on a 3G phone: saying yes carries on and finishes', /^Done/.test(await yes.page.textContent('#ai-status')), await yes.page.textContent('#ai-status'));
+			await finish(t, yes.page, 'passport-ai-accepted');
+		}
 	}
 
 	// ---------------- AI background removal ----------------

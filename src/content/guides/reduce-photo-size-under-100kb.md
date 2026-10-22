@@ -4,7 +4,7 @@ description: "A step-by-step way to shrink a photo for a portal or form, with re
 tool: compress-image
 published: 2026-10-22
 updated: 2026-10-22
-draft: true
+draft: false
 ---
 
 Many online forms and portals reject a photo with "file too large" or ask for an image under 100 KB, 200 KB or 500 KB. A photo straight from a modern phone is usually several megabytes, so it has to be made much smaller first. This guide shows a simple way to do that on your phone, and what to change if the first try is not small enough.

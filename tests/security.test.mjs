@@ -44,6 +44,7 @@ async function strictPage(t, route, width = 375) {
 		}
 	});
 	const page = await context.newPage();
+	page.on('dialog', (d) => d.accept());
 	page.violations = [];
 	page.errors = [];
 	page.requested = [];

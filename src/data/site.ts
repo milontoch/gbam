@@ -1,9 +1,9 @@
 // Site-wide facts used by the legal and contact pages. Change them here, once.
 export const site = {
-	name: 'Handy',
+	name: 'HandyQuill',
 	// PUBLIC on the live site (Contact, Privacy and Terms pages). Use a dedicated address you are happy to share.
 	email: 'milonairetouch@gmail.com',
-	updated: '8 October 2026', // update this whenever you change the Privacy or Terms text
+	updated: '22 October 2026', // update this whenever you change the Privacy or Terms text
 	country: 'Nigeria',
 	// Cloudflare Web Analytics site token (Milestone 11). Leave empty to switch analytics off completely:
 	// with an empty value no analytics code is added to any page.

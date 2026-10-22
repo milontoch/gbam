@@ -4,7 +4,7 @@ description: "Step-by-step: turn your finished CV or invoice into a PDF on Andro
 tool: cv-builder
 published: 2026-10-22
 updated: 2026-10-22
-draft: true
+draft: false
 ---
 
 A CV or invoice should be sent as a **PDF**, because a PDF looks the same on every phone and computer. Our [CV Builder](/cv-builder) and [Invoice Generator](/invoice-generator) make the document on your screen. To turn it into a PDF file, you use your phone's **print** screen, which has a "save as PDF" option. It looks odd the first time, so here are the steps.

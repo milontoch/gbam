@@ -7,7 +7,7 @@ import { z } from 'astro/zod';
 const guides = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),
 	schema: z.object({
-		title: z.string().min(15).max(60), // the page title adds " | <site name>", so keep this short
+		title: z.string().min(15).max(55), // the page title adds " | <site name>", so keep this short
 		description: z.string().min(70).max(160),
 		tool: z.string().optional(), // slug of the tool this guide is about, for example "compress-image"
 		published: z.coerce.date(),

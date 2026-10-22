@@ -27,6 +27,14 @@ async function waitForServer() {
 	throw new Error('The preview server did not start. Did you run "npm run build" first?');
 }
 
+// Safety net: a normal full run takes under 10 minutes. If something stalls, stop with a clear message instead of hanging.
+const watchdog = setTimeout(() => {
+	console.error('\nThe test run took longer than 25 minutes and was stopped. Something is stuck. Run one suite at a time with --only=NAME to find it.');
+	stop();
+	process.exit(3);
+}, 25 * 60 * 1000);
+watchdog.unref();
+
 const t = new Report();
 try {
 	await waitForServer();

@@ -6,6 +6,10 @@
     "/compress-pdf",
     "/contact",
     "/cv-builder",
+    "/guides",
+    "/guides/merge-pdf-files-on-your-phone",
+    "/guides/reduce-photo-size-under-100kb",
+    "/guides/save-cv-or-invoice-as-pdf-on-phone",
     "/invoice-generator",
     "/licenses",
     "/merge-pdf",
@@ -18,7 +22,7 @@
   "pages": {
     "/": {
       "status": 200,
-      "title": "Handy – Free Online Tools That Keep Your Files Private",
+      "title": "HandyQuill – Free Online Tools That Keep Your Files Private",
       "description": "Free tools for PDFs, images, invoices and CVs. Everything runs in your browser, so your files never leave your device.",
       "h1": "Free tools that keep your files private",
       "canonicalPath": "/",
@@ -27,21 +31,21 @@
         "Organization",
         "WebSite"
       ],
-      "internalLinks": 14
+      "internalLinks": 18
     },
     "/about": {
       "status": 200,
-      "title": "About Handy – Free, Private Online Tools",
-      "description": "Handy offers free tools for PDFs, photos, invoices and CVs that run in your browser, so your files never leave your device.",
-      "h1": "About Handy",
+      "title": "About HandyQuill – Free, Private Online Tools",
+      "description": "HandyQuill offers free tools for PDFs, photos, invoices and CVs that run in your browser, so your files never leave your device.",
+      "h1": "About HandyQuill",
       "canonicalPath": "/about",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/compress-image": {
       "status": 200,
-      "title": "Compress Image Online – Free & Private | Handy",
+      "title": "Compress Image Online – Free & Private | HandyQuill",
       "description": "Reduce JPG, PNG and WebP file size right in your browser. Free, no sign-up, and your photos never leave your device.",
       "h1": "Compress Image Online",
       "canonicalPath": "/compress-image",
@@ -55,11 +59,11 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 16
     },
     "/compress-pdf": {
       "status": 200,
-      "title": "Compress PDF Online – Free & Private | Handy",
+      "title": "Compress PDF Online – Free & Private | HandyQuill",
       "description": "Make scanned PDFs smaller for job portals and email, right in your browser. Free, and your files never leave your device.",
       "h1": "Compress PDF Online",
       "canonicalPath": "/compress-pdf",
@@ -73,21 +77,21 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/contact": {
       "status": 200,
-      "title": "Contact Handy – Report a Problem or Suggest a Tool",
-      "description": "Contact Handy to report a problem, ask a question or suggest a new tool.",
+      "title": "Contact HandyQuill – Report a Problem or Suggest a Tool",
+      "description": "Contact HandyQuill to report a problem, ask a question or suggest a new tool.",
       "h1": "Contact us",
       "canonicalPath": "/contact",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/cv-builder": {
       "status": 200,
-      "title": "Free CV Builder – Make a CV and Download PDF | Handy",
+      "title": "Free CV Builder – Make a CV and Download PDF | HandyQuill",
       "description": "Build a clean, professional CV in minutes and download it as PDF. Free, no sign-up, and your details never leave your device.",
       "h1": "Free CV Builder",
       "canonicalPath": "/cv-builder",
@@ -101,11 +105,69 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 16
+    },
+    "/guides": {
+      "status": 200,
+      "title": "Guides: How to Compress, Merge and Prepare Files | HandyQuill",
+      "description": "Plain-language, step-by-step guides for everyday file jobs: shrinking photos, merging PDFs, making CVs and invoices.",
+      "h1": "Guides",
+      "canonicalPath": "/guides",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 18
+    },
+    "/guides/merge-pdf-files-on-your-phone": {
+      "status": 200,
+      "title": "How to Merge PDF Files on Your Phone | HandyQuill",
+      "description": "Combine several PDFs into one on Android or iPhone without installing an app, with tips for ordering pages and fixing common problems.",
+      "h1": "How to Merge PDF Files on Your Phone",
+      "canonicalPath": "/guides/merge-pdf-files-on-your-phone",
+      "noindex": false,
+      "structuredData": [
+        "Article",
+        "BreadcrumbList",
+        "ImageObject",
+        "ListItem",
+        "Organization"
+      ],
+      "internalLinks": 17
+    },
+    "/guides/reduce-photo-size-under-100kb": {
+      "status": 200,
+      "title": "How to Reduce a Photo to Under 100 KB | HandyQuill",
+      "description": "A step-by-step way to shrink a photo for a portal or form, with real file-size results at different widths and quality settings.",
+      "h1": "How to Reduce a Photo to Under 100 KB",
+      "canonicalPath": "/guides/reduce-photo-size-under-100kb",
+      "noindex": false,
+      "structuredData": [
+        "Article",
+        "BreadcrumbList",
+        "ImageObject",
+        "ListItem",
+        "Organization"
+      ],
+      "internalLinks": 17
+    },
+    "/guides/save-cv-or-invoice-as-pdf-on-phone": {
+      "status": 200,
+      "title": "How to Save a CV or Invoice as a PDF on Your Phone | HandyQuill",
+      "description": "Step-by-step: turn your finished CV or invoice into a PDF on Android and iPhone using the print screen, plus fixes for common problems.",
+      "h1": "How to Save a CV or Invoice as a PDF on Your Phone",
+      "canonicalPath": "/guides/save-cv-or-invoice-as-pdf-on-phone",
+      "noindex": false,
+      "structuredData": [
+        "Article",
+        "BreadcrumbList",
+        "ImageObject",
+        "ListItem",
+        "Organization"
+      ],
+      "internalLinks": 17
     },
     "/invoice-generator": {
       "status": 200,
-      "title": "Free Invoice & Receipt Generator | Handy",
+      "title": "Free Invoice & Receipt Generator | HandyQuill",
       "description": "Create professional invoices and receipts in Naira or any currency and download them as PDF. Free, no sign-up, and nothing is uploaded.",
       "h1": "Free Invoice & Receipt Generator",
       "canonicalPath": "/invoice-generator",
@@ -119,21 +181,21 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/licenses": {
       "status": 200,
-      "title": "Open-source Licences | Handy",
-      "description": "The open-source software and AI model that Handy is built with, and their licences.",
+      "title": "Open-source Licences | HandyQuill",
+      "description": "The open-source software and AI model that HandyQuill is built with, and their licences.",
       "h1": "Open-source licences",
       "canonicalPath": "/licenses",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/merge-pdf": {
       "status": 200,
-      "title": "Merge PDF Files Online – Free & Private | Handy",
+      "title": "Merge PDF Files Online – Free & Private | HandyQuill",
       "description": "Combine multiple PDF files into one in your browser. Free, no sign-up, and your documents never leave your device.",
       "h1": "Merge PDF Files Online",
       "canonicalPath": "/merge-pdf",
@@ -147,11 +209,11 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 16
     },
     "/passport-photo-maker": {
       "status": 200,
-      "title": "Passport Photo Maker – Free & Private | Handy",
+      "title": "Passport Photo Maker – Free & Private | HandyQuill",
       "description": "Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.",
       "h1": "Passport Photo Maker",
       "canonicalPath": "/passport-photo-maker",
@@ -165,21 +227,21 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/privacy": {
       "status": 200,
-      "title": "Privacy Policy – Your Files Stay on Your Device | Handy",
-      "description": "How Handy handles your data. Your files are processed in your browser and are never uploaded to us.",
+      "title": "Privacy Policy – Your Files Stay on Your Device | HandyQuill",
+      "description": "How HandyQuill handles your data. Your files are processed in your browser and are never uploaded to us.",
       "h1": "Privacy Policy",
       "canonicalPath": "/privacy",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/resize-image": {
       "status": 200,
-      "title": "Resize Image Online – Free & Private | Handy",
+      "title": "Resize Image Online – Free & Private | HandyQuill",
       "description": "Resize photos to any width and height in your browser. Free, no sign-up, and your images never leave your device.",
       "h1": "Resize Image Online",
       "canonicalPath": "/resize-image",
@@ -193,11 +255,11 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/split-pdf": {
       "status": 200,
-      "title": "Split PDF Online – Free & Private | Handy",
+      "title": "Split PDF Online – Free & Private | HandyQuill",
       "description": "Extract pages or split a PDF into separate files in your browser. Free, and your documents never leave your device.",
       "h1": "Split PDF Online",
       "canonicalPath": "/split-pdf",
@@ -211,17 +273,17 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 14
+      "internalLinks": 15
     },
     "/terms": {
       "status": 200,
-      "title": "Terms of Use | Handy Free Online Tools",
-      "description": "The rules for using Handy's free online tools, including what we promise and what we cannot guarantee.",
+      "title": "Terms of Use | HandyQuill Free Online Tools",
+      "description": "The rules for using HandyQuill's free online tools, including what we promise and what we cannot guarantee.",
       "h1": "Terms of Use",
       "canonicalPath": "/terms",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 14
+      "internalLinks": 15
     }
   }
 }

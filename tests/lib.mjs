@@ -40,6 +40,7 @@ export async function open(t, path, opts = {}) {
 	await context.route(/cloudflareinsights\.com/, (r) => r.abort());
 	const page = await context.newPage();
 	page.log = { errors: [], requests: [] };
+	page.on('dialog', (d) => d.accept()); // the slow-connection data warning: accept so that tests which need the AI tool carry on
 	page.on('pageerror', (e) => page.log.errors.push(e.message));
 	// A blocked analytics request is expected in tests, so its console message is not a real error.
 	page.on('console', (m) => m.type() === 'error' && !/cloudflareinsights\.com/.test(m.location().url || '') && page.log.errors.push(m.text()));
