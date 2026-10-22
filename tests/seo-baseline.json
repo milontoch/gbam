@@ -1,0 +1,208 @@
+{
+  "paths": [
+    "/",
+    "/about",
+    "/compress-image",
+    "/contact",
+    "/cv-builder",
+    "/invoice-generator",
+    "/licenses",
+    "/merge-pdf",
+    "/passport-photo-maker",
+    "/privacy",
+    "/resize-image",
+    "/split-pdf",
+    "/terms"
+  ],
+  "pages": {
+    "/": {
+      "status": 200,
+      "title": "Handy – Free Online Tools That Keep Your Files Private",
+      "description": "Free tools for PDFs, images, invoices and CVs. Everything runs in your browser, so your files never leave your device.",
+      "h1": "Free tools that keep your files private",
+      "canonicalPath": "/",
+      "noindex": false,
+      "structuredData": [
+        "Organization",
+        "WebSite"
+      ],
+      "internalLinks": 13
+    },
+    "/about": {
+      "status": 200,
+      "title": "About Handy – Free, Private Online Tools",
+      "description": "Handy offers free tools for PDFs, photos, invoices and CVs that run in your browser, so your files never leave your device.",
+      "h1": "About Handy",
+      "canonicalPath": "/about",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 13
+    },
+    "/compress-image": {
+      "status": 200,
+      "title": "Compress Image Online – Free & Private | Handy",
+      "description": "Reduce JPG, PNG and WebP file size right in your browser. Free, no sign-up, and your photos never leave your device.",
+      "h1": "Compress Image Online",
+      "canonicalPath": "/compress-image",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/contact": {
+      "status": 200,
+      "title": "Contact Handy – Report a Problem or Suggest a Tool",
+      "description": "Contact Handy to report a problem, ask a question or suggest a new tool.",
+      "h1": "Contact us",
+      "canonicalPath": "/contact",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 13
+    },
+    "/cv-builder": {
+      "status": 200,
+      "title": "Free CV Builder – Make a CV and Download PDF | Handy",
+      "description": "Build a clean, professional CV in minutes and download it as PDF. Free, no sign-up, and your details never leave your device.",
+      "h1": "Free CV Builder",
+      "canonicalPath": "/cv-builder",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/invoice-generator": {
+      "status": 200,
+      "title": "Free Invoice & Receipt Generator | Handy",
+      "description": "Create professional invoices and receipts in Naira or any currency and download them as PDF. Free, no sign-up, and nothing is uploaded.",
+      "h1": "Free Invoice & Receipt Generator",
+      "canonicalPath": "/invoice-generator",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/licenses": {
+      "status": 200,
+      "title": "Open-source Licences | Handy",
+      "description": "The open-source software and AI model that Handy is built with, and their licences.",
+      "h1": "Open-source licences",
+      "canonicalPath": "/licenses",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 13
+    },
+    "/merge-pdf": {
+      "status": 200,
+      "title": "Merge PDF Files Online – Free & Private | Handy",
+      "description": "Combine multiple PDF files into one in your browser. Free, no sign-up, and your documents never leave your device.",
+      "h1": "Merge PDF Files Online",
+      "canonicalPath": "/merge-pdf",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/passport-photo-maker": {
+      "status": 200,
+      "title": "Passport Photo Maker – Free & Private | Handy",
+      "description": "Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.",
+      "h1": "Passport Photo Maker",
+      "canonicalPath": "/passport-photo-maker",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/privacy": {
+      "status": 200,
+      "title": "Privacy Policy – Your Files Stay on Your Device | Handy",
+      "description": "How Handy handles your data. Your files are processed in your browser and are never uploaded to us.",
+      "h1": "Privacy Policy",
+      "canonicalPath": "/privacy",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 13
+    },
+    "/resize-image": {
+      "status": 200,
+      "title": "Resize Image Online – Free & Private | Handy",
+      "description": "Resize photos to any width and height in your browser. Free, no sign-up, and your images never leave your device.",
+      "h1": "Resize Image Online",
+      "canonicalPath": "/resize-image",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/split-pdf": {
+      "status": 200,
+      "title": "Split PDF Online – Free & Private | Handy",
+      "description": "Extract pages or split a PDF into separate files in your browser. Free, and your documents never leave your device.",
+      "h1": "Split PDF Online",
+      "canonicalPath": "/split-pdf",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 13
+    },
+    "/terms": {
+      "status": 200,
+      "title": "Terms of Use | Handy Free Online Tools",
+      "description": "The rules for using Handy's free online tools, including what we promise and what we cannot guarantee.",
+      "h1": "Terms of Use",
+      "canonicalPath": "/terms",
+      "noindex": false,
+      "structuredData": [],
+      "internalLinks": 13
+    }
+  }
+}
