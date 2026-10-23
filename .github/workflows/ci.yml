@@ -20,7 +20,17 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - run: npm run check
+      - name: Type-check
+        run: |
+          set +e
+          npm run check > check.log 2>&1
+          code=$?
+          cat check.log
+          # On failure, copy the end of the output into a short annotation so it can be read without signing in.
+          if [ $code -ne 0 ]; then
+            echo "::error title=Type-check failed::$(tail -n 40 check.log | head -c 3500 | tr '\n' '|' | tr '%' ' ')"
+          fi
+          exit $code
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
       - run: node tests/run.mjs
