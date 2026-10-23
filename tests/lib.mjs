@@ -45,7 +45,7 @@ export async function open(t, path, opts = {}) {
 	// A blocked analytics request is expected in tests, so its console message is not a real error.
 	page.on('console', (m) => m.type() === 'error' && !/cloudflareinsights\.com/.test(m.location().url || '') && page.log.errors.push(m.text()));
 	page.on('request', (r) => page.log.requests.push({ url: r.url(), method: r.method() }));
-	await page.goto(BASE + path, { waitUntil: opts.waitUntil ?? 'load' });
+	await page.goto(BASE + path, { waitUntil: opts.waitUntil ?? 'load', timeout: 90000 }); // generous: live networks vary
 	return page;
 }
 

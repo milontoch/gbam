@@ -57,7 +57,7 @@ async function strictPage(t, route, width = 375) {
 		window.__csp = [];
 		document.addEventListener('securitypolicyviolation', (e) => window.__csp.push(`${e.violatedDirective} ${e.blockedURI}`));
 	});
-	await page.goto(BASE + route);
+	await page.goto(BASE + route, { timeout: 90000 }); // generous: live networks vary
 	return page;
 }
 
