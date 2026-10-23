@@ -33,4 +33,13 @@ jobs:
           exit $code
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
-      - run: node tests/run.mjs
+      - name: Browser tests
+        run: |
+          set +e
+          node tests/run.mjs > tests.log 2>&1
+          code=$?
+          tail -n 60 tests.log
+          if [ $code -ne 0 ]; then
+            echo "::error title=Browser tests failed::$(grep -E '^FAIL|passed|crash|Failures|^ - ' tests.log | head -n 25 | head -c 3500 | tr '\n' '|' | tr '%' ' ')"
+          fi
+          exit $code
