@@ -3,7 +3,7 @@ export const site = {
 	name: 'HandyQuill',
 	// PUBLIC on the live site (Contact, Privacy and Terms pages). Use a dedicated address you are happy to share.
 	email: 'milonairetouch@gmail.com',
-	updated: '22 October 2026', // update this whenever you change the Privacy or Terms text
+	updated: '25 October 2026', // update this whenever you change the Privacy or Terms text
 	country: 'Nigeria',
 	// Cloudflare Web Analytics site token (Milestone 11). Leave empty to switch analytics off completely:
 	// with an empty value no analytics code is added to any page.

@@ -813,3 +813,98 @@ progress {
 .guide-list p {
 	margin: 0.25rem 0;
 }
+
+/* Calculator results */
+.stat-grid {
+	display: grid;
+	gap: 0.75rem;
+	grid-template-columns: 1fr;
+}
+
+.stat {
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.75rem 1rem;
+	background: var(--surface);
+}
+
+.stat p {
+	margin: 0;
+}
+
+.stat-label {
+	font-size: 0.85rem;
+	color: var(--muted);
+}
+
+.stat-value {
+	font-size: 1.6rem;
+	font-weight: 800;
+	line-height: 1.2;
+	overflow-wrap: anywhere;
+}
+
+.stat-note {
+	font-size: 0.85rem;
+	color: var(--muted);
+	margin-top: 0.15rem;
+}
+
+.table-wrap {
+	overflow-x: auto;
+	max-width: 100%;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	margin-top: 0.75rem;
+}
+
+.table-wrap table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9rem;
+}
+
+.table-wrap th,
+.table-wrap td {
+	padding: 0.4rem 0.6rem;
+	text-align: right;
+	white-space: nowrap;
+	border-bottom: 1px solid var(--line);
+}
+
+.table-wrap th:first-child,
+.table-wrap td:first-child {
+	text-align: left;
+}
+
+.table-wrap th {
+	background: var(--surface);
+	position: sticky;
+	top: 0;
+}
+
+@media (min-width: 40rem) {
+	.stat-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Room kept for form rows that JavaScript draws just after the page appears, so nothing below them jumps.
+   slot-3 = rows with three fields, slot-4 = rows with four fields. */
+.slot-3 {
+	min-height: 21rem;
+}
+
+.slot-4 {
+	min-height: 30rem;
+}
+
+@media (min-width: 40rem) {
+	.slot-3 {
+		min-height: 15.5rem;
+	}
+
+	.slot-4 {
+		min-height: 24.5rem;
+	}
+}

@@ -2,6 +2,7 @@
   "paths": [
     "/",
     "/about",
+    "/cgpa-calculator",
     "/compress-image",
     "/compress-pdf",
     "/contact",
@@ -12,12 +13,14 @@
     "/guides/save-cv-or-invoice-as-pdf-on-phone",
     "/invoice-generator",
     "/licenses",
+    "/loan-calculator",
     "/merge-pdf",
     "/passport-photo-maker",
     "/privacy",
     "/resize-image",
     "/split-pdf",
-    "/terms"
+    "/terms",
+    "/whatsapp-link-generator"
   ],
   "pages": {
     "/": {
@@ -31,7 +34,7 @@
         "Organization",
         "WebSite"
       ],
-      "internalLinks": 18
+      "internalLinks": 21
     },
     "/about": {
       "status": 200,
@@ -41,7 +44,25 @@
       "canonicalPath": "/about",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 15
+      "internalLinks": 18
+    },
+    "/cgpa-calculator": {
+      "status": 200,
+      "title": "CGPA Calculator (5.0 Scale) – Free & Private | HandyQuill",
+      "description": "Add your courses and grades to get your semester GPA, your updated CGPA and your degree class on the 5.0 scale. Free, and nothing is sent anywhere.",
+      "h1": "CGPA Calculator (5.0 Scale)",
+      "canonicalPath": "/cgpa-calculator",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 18
     },
     "/compress-image": {
       "status": 200,
@@ -59,7 +80,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 16
+      "internalLinks": 19
     },
     "/compress-pdf": {
       "status": 200,
@@ -77,7 +98,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/contact": {
       "status": 200,
@@ -87,7 +108,7 @@
       "canonicalPath": "/contact",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/cv-builder": {
       "status": 200,
@@ -105,7 +126,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 16
+      "internalLinks": 19
     },
     "/guides": {
       "status": 200,
@@ -115,7 +136,7 @@
       "canonicalPath": "/guides",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 21
     },
     "/guides/merge-pdf-files-on-your-phone": {
       "status": 200,
@@ -131,7 +152,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 17
+      "internalLinks": 20
     },
     "/guides/reduce-photo-size-under-100kb": {
       "status": 200,
@@ -147,7 +168,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 17
+      "internalLinks": 20
     },
     "/guides/save-cv-or-invoice-as-pdf-on-phone": {
       "status": 200,
@@ -163,7 +184,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 17
+      "internalLinks": 20
     },
     "/invoice-generator": {
       "status": 200,
@@ -181,7 +202,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/licenses": {
       "status": 200,
@@ -191,7 +212,25 @@
       "canonicalPath": "/licenses",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 15
+      "internalLinks": 18
+    },
+    "/loan-calculator": {
+      "status": 200,
+      "title": "Loan Interest Calculator – Flat vs Reducing | HandyQuill",
+      "description": "Work out the monthly payment, total interest and true yearly cost of a loan, for flat-rate or reducing-balance interest. Free, and nothing is sent anywhere.",
+      "h1": "Loan Interest Calculator: Flat vs Reducing Balance",
+      "canonicalPath": "/loan-calculator",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 18
     },
     "/merge-pdf": {
       "status": 200,
@@ -209,7 +248,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 16
+      "internalLinks": 19
     },
     "/passport-photo-maker": {
       "status": 200,
@@ -227,7 +266,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/privacy": {
       "status": 200,
@@ -237,7 +276,7 @@
       "canonicalPath": "/privacy",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/resize-image": {
       "status": 200,
@@ -255,7 +294,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/split-pdf": {
       "status": 200,
@@ -273,7 +312,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 15
+      "internalLinks": 18
     },
     "/terms": {
       "status": 200,
@@ -283,7 +322,25 @@
       "canonicalPath": "/terms",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 15
+      "internalLinks": 18
+    },
+    "/whatsapp-link-generator": {
+      "status": 200,
+      "title": "WhatsApp Link Generator – Click to Chat | HandyQuill",
+      "description": "Make a wa.me link that opens a WhatsApp chat with your number and a ready-typed message. Free, no sign-up, and nothing is sent anywhere.",
+      "h1": "WhatsApp Link Generator (Click to Chat)",
+      "canonicalPath": "/whatsapp-link-generator",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 18
     }
   }
 }

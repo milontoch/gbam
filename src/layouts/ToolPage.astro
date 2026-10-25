@@ -12,9 +12,10 @@ interface Props {
 	intro: string; // 1 to 2 sentences under the heading
 	steps: string[]; // "How to use" list
 	faq: { q: string; a: string }[];
+	privacy?: 'files' | 'typed'; // which trust message to show
 }
 
-const { slug, intro, steps, faq } = Astro.props;
+const { slug, intro, steps, faq, privacy = 'files' } = Astro.props;
 const tool = getTool(slug);
 const toolGuides = (await getGuides()).filter((g) => g.data.tool === slug);
 const related = liveTools()
@@ -66,7 +67,7 @@ const ld = (obj: object) => JSON.stringify(obj).replace(/</g, '\\u003c');
 			<p>{intro}</p>
 		</div>
 
-		<PrivacyBadge />
+		<PrivacyBadge kind={privacy} />
 
 		<div class="tool-box">
 			<slot />

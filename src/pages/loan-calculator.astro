@@ -1,0 +1,109 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+
+const steps = [
+	'Type the amount, the interest rate and how long the loan lasts. Choose whether the rate is per year or per month, and whether the term is in months or years.',
+	'Choose how the lender charges interest: "reducing balance" (interest only on what you still owe) or "flat" (interest on the full amount for the whole loan). If you are not sure, ask the lender or look at your offer letter.',
+	'Read your monthly payment, total interest and real yearly cost. Open the payment schedule to see every month.',
+];
+
+const faq = [
+	{
+		q: 'What is the difference between flat and reducing balance?',
+		a: 'With reducing balance, each month\'s interest is worked out on the amount you still owe, so it shrinks as you repay. With a flat rate, the interest is worked out once on the full amount you borrowed, for the whole loan, and added on top, even though you are paying the loan back bit by bit. A flat rate therefore costs more than the same number on a reducing balance.',
+	},
+	{
+		q: 'What is the "real yearly cost"?',
+		a: 'It turns any loan into one comparable number: the reducing-balance interest rate per year that gives the same payments. Two loans can be compared fairly by this number even when one is quoted per month and the other per year, or one is flat and the other is not.',
+	},
+	{
+		q: 'Can you show an example?',
+		a: 'Borrow ₦1,000,000 for 12 months at 5% a month flat. The interest is 5% × 12 months = 60% of ₦1,000,000 = ₦600,000, so you repay ₦1,600,000, which is ₦133,333.33 a month. Because you owe less every month but pay interest on the full amount, the real yearly cost is about 97%, not 60%.',
+	},
+	{
+		q: 'Does it include fees and insurance?',
+		a: 'No. Many loans also charge processing fees, insurance, or VAT on interest. These make the loan cost more, so ask the lender for the full cost. The numbers here cover interest only.',
+	},
+	{
+		q: 'Why is my lender\'s figure slightly different?',
+		a: 'Lenders may count days instead of whole months, round each payment differently, or start the first payment on another date. Expect small differences. If the gap is large, ask the lender how they worked it out.',
+	},
+	{
+		q: 'Is anything I type saved or sent?',
+		a: 'No. The numbers are used only to do the sum inside your browser. Nothing is sent to us or stored, and they disappear when you close the page.',
+	},
+	{
+		q: 'Is this financial advice?',
+		a: 'No. It is a calculator for estimates. Read your loan agreement carefully, and ask the lender or a qualified adviser before you borrow.',
+	},
+];
+---
+
+<ToolPage
+	slug="loan-calculator"
+	intro="See your monthly payment, total interest and real yearly cost, for flat-rate or reducing-balance loans. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+	privacy="typed"
+>
+	<div class="form-grid">
+		<label class="field">
+			<span>Currency</span>
+			<select id="currency">
+				<option value="NGN" selected>Naira (₦)</option>
+				<option value="USD">US dollar ($)</option>
+				<option value="GBP">Pound (£)</option>
+				<option value="EUR">Euro (€)</option>
+				<option value="GHS">Ghana cedi (GH₵)</option>
+				<option value="KES">Kenyan shilling (KSh)</option>
+				<option value="ZAR">South African rand (R)</option>
+			</select>
+		</label>
+		<label class="field">
+			<span>Amount you borrow</span>
+			<input type="number" id="amount" inputmode="decimal" min="0" step="any" placeholder="e.g. 1000000" />
+		</label>
+		<label class="field">
+			<span>Interest rate (%)</span>
+			<input type="number" id="rate" inputmode="decimal" min="0" step="any" placeholder="e.g. 5" />
+		</label>
+		<label class="field">
+			<span>The rate is charged</span>
+			<select id="rate-per">
+				<option value="month">per month</option>
+				<option value="year" selected>per year</option>
+			</select>
+		</label>
+		<label class="field">
+			<span>Length of the loan</span>
+			<input type="number" id="term" inputmode="decimal" min="0" step="any" placeholder="e.g. 12" />
+		</label>
+		<label class="field">
+			<span>Counted in</span>
+			<select id="term-unit">
+				<option value="months" selected>months</option>
+				<option value="years">years</option>
+			</select>
+		</label>
+	</div>
+
+	<label class="choice">
+		<input type="radio" name="mode" id="mode-reducing" checked />
+		<span>Reducing balance (interest only on what you still owe)</span>
+	</label>
+	<label class="choice">
+		<input type="radio" name="mode" id="mode-flat" />
+		<span>Flat rate (interest on the full amount for the whole loan)</span>
+	</label>
+
+	<h2 class="form-section">Your result</h2>
+	<div id="result" role="status" aria-live="polite"></div>
+	<div class="actions">
+		<button type="button" class="btn btn-secondary hidden" id="schedule-btn">Show payment schedule</button>
+	</div>
+	<div id="schedule"></div>
+</ToolPage>
+
+<script>
+	import '../scripts/loan-calculator';
+</script>

@@ -3,7 +3,8 @@ import { h } from './ui';
 export interface RepeaterField {
 	key: string;
 	label: string;
-	kind?: 'text' | 'number' | 'textarea';
+	kind?: 'text' | 'number' | 'textarea' | 'select';
+	options?: { value: string; label: string }[]; // for kind: 'select'
 	placeholder?: string;
 	wide?: boolean; // spans the full width on larger screens
 }
@@ -46,8 +47,14 @@ export function mountRepeater<T extends Record<string, string>>(o: Options<T>) {
 			for (const f of o.fields) {
 				const label = h('label', f.wide ? 'field wide' : 'field');
 				label.append(h('span', undefined, f.label));
-				const input = f.kind === 'textarea' ? h('textarea') : h('input');
-				if (input instanceof HTMLInputElement) {
+				const input = f.kind === 'textarea' ? h('textarea') : f.kind === 'select' ? h('select') : h('input');
+				if (input instanceof HTMLSelectElement) {
+					for (const choice of f.options ?? []) {
+						const opt = h('option', undefined, choice.label);
+						opt.value = choice.value;
+						input.append(opt);
+					}
+				} else if (input instanceof HTMLInputElement) {
 					input.type = f.kind === 'number' ? 'number' : 'text';
 					if (f.kind === 'number') {
 						input.inputMode = 'decimal';
@@ -58,7 +65,7 @@ export function mountRepeater<T extends Record<string, string>>(o: Options<T>) {
 					input.rows = 3;
 				}
 				input.value = item[f.key] ?? '';
-				if (f.placeholder) input.placeholder = f.placeholder;
+				if (f.placeholder && !(input instanceof HTMLSelectElement)) input.placeholder = f.placeholder;
 				input.addEventListener('input', () => {
 					(item as Record<string, string>)[f.key] = input.value;
 					o.onChange();

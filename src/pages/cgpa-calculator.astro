@@ -1,0 +1,69 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+
+const steps = [
+	'Add each course from the semester: its credit units and the grade you got.',
+	'Your semester GPA appears straight away. To see your new CGPA, also type the CGPA and total credit units you had before this semester.',
+	'Use "Add course" for more rows. Rows you leave empty are ignored.',
+];
+
+const faq = [
+	{
+		q: 'How is GPA worked out?',
+		a: 'Each grade is worth points: A is 5, B is 4, C is 3, D is 2, E is 1 and F is 0. For every course, multiply the points by its credit units. Add those results together, then divide by the total credit units. For example, a 3-unit A and a 2-unit C give (3 × 5 + 2 × 3) ÷ 5 = 4.20.',
+	},
+	{
+		q: 'How is my new CGPA worked out?',
+		a: 'The tool takes what you have already earned (your CGPA multiplied by your completed units), adds this semester\'s points, and divides by all the units together. That is the same method most schools use, so the answer should match your result sheet, apart from rounding.',
+	},
+	{
+		q: 'Does my school use these grades and classes?',
+		a: 'This calculator uses the 5.0 scale and the degree classes that most Nigerian universities use: First Class from 4.50, Second Class Upper from 3.50, Second Class Lower from 2.40, Third Class from 1.50 and Pass from 1.00. Schools can differ, and some private universities use a 4.0 scale. Your school\'s handbook or your department has the final say.',
+	},
+	{
+		q: 'What about courses I repeated or carried over?',
+		a: 'Rules differ between schools. Some replace the old grade and some count both attempts. Ask your department, then enter your courses the way your school counts them.',
+	},
+	{
+		q: 'Is my information saved?',
+		a: 'No. The numbers you type are used only to do the sum inside your browser. Nothing is sent to us or stored, and they disappear when you close the page.',
+	},
+	{
+		q: 'Why does my result sheet differ by a few hundredths?',
+		a: 'Schools round in different ways. We round to two decimal places, which is the most common method.',
+	},
+];
+---
+
+<ToolPage
+	slug="cgpa-calculator"
+	intro="Add your courses and grades to see your semester GPA, your new CGPA and your degree class on the 5.0 scale. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+	privacy="typed"
+>
+	<h2 class="form-section">This semester's courses</h2>
+	<div id="courses" class="slot-3"></div>
+	<div class="actions">
+		<button type="button" class="btn btn-secondary" id="add-course">+ Add course</button>
+	</div>
+
+	<h2 class="form-section">Before this semester (optional)</h2>
+	<div class="form-grid">
+		<label class="field">
+			<span>Your CGPA so far</span>
+			<input type="number" id="prev-cgpa" inputmode="decimal" min="0" max="5" step="any" placeholder="e.g. 3.80" />
+		</label>
+		<label class="field">
+			<span>Credit units completed so far</span>
+			<input type="number" id="prev-units" inputmode="numeric" min="0" max="600" step="any" placeholder="e.g. 60" />
+		</label>
+	</div>
+
+	<h2 class="form-section">Your result</h2>
+	<div id="result" role="status" aria-live="polite"></div>
+</ToolPage>
+
+<script>
+	import '../scripts/cgpa-calculator';
+</script>

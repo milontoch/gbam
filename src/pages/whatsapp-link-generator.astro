@@ -1,0 +1,87 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+
+const steps = [
+	'Choose the country and type the phone number. A local number such as 0801 234 5678 is fine, and spaces and dashes are ignored.',
+	'Optional: type the message that should already be written when someone opens the chat.',
+	'Copy the link and put it on your social media bio, your website, a flyer or a message. Tap "Open in WhatsApp" to test it first.',
+];
+
+const faq = [
+	{
+		q: 'What does the link do?',
+		a: 'When someone taps it, WhatsApp opens a chat with your number, with your message already typed in. They only have to press send. It works on phones and in WhatsApp Web, and the person does not need to save your number first.',
+	},
+	{
+		q: 'Does the other person need a WhatsApp account?',
+		a: 'Yes. If they do not have WhatsApp, the link will offer to install it. The same link works for WhatsApp Business numbers.',
+	},
+	{
+		q: 'Is my number sent to HandyQuill?',
+		a: 'No. The link is built inside your browser from what you type, and nothing is sent to us or saved. The number is part of the link itself, so anyone you give the link to can see it.',
+	},
+	{
+		q: 'What does "share a message without a number" do?',
+		a: 'It makes a link with only a message in it. When someone opens it, WhatsApp lets them choose which contact or group to send the message to. It is useful for invitations and sharing an announcement.',
+	},
+	{
+		q: 'Why does it say my number is wrong?',
+		a: 'WhatsApp needs the full number with the country code. A Nigerian mobile number has 10 digits after 234, so 0801 234 5678 becomes 234 801 234 5678. If your number is from another country, pick it in the list, or choose "Other" and type the whole number with its country code.',
+	},
+	{
+		q: 'How long can the message be?',
+		a: 'Up to 1000 characters here, so the link keeps working in every app. Shorter messages are safer, especially if you will print the link as a QR code.',
+	},
+	{
+		q: 'Will this get me spam?',
+		a: 'Putting your number in a public link means anyone can message you, so use a business number if you plan to publish it widely. You can block people who message you in WhatsApp as usual.',
+	},
+];
+---
+
+<ToolPage
+	slug="whatsapp-link-generator"
+	intro="Make a link that opens a WhatsApp chat with your number and a message already typed. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+	privacy="typed"
+>
+	<label class="choice">
+		<input type="checkbox" id="no-number" />
+		<span>Share a message without a number (people choose who to send it to)</span>
+	</label>
+
+	<div id="phone-fields" class="form-grid spaced">
+		<label class="field">
+			<span>Country</span>
+			<select id="country"></select>
+		</label>
+		<label class="field">
+			<span>Phone number</span>
+			<input type="tel" id="phone" inputmode="tel" autocomplete="off" placeholder="e.g. 0801 234 5678" maxlength="25" />
+		</label>
+	</div>
+
+	<label class="field">
+		<span>Message (optional): <span class="muted" id="message-count">0 of 1000</span></span>
+		<textarea id="message" rows="4" placeholder="e.g. Hello, I saw your ad and I would like to order."></textarea>
+	</label>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+
+	<div id="output" class="hidden">
+		<label class="field">
+			<span>Your link</span>
+			<input type="text" id="link" readonly />
+		</label>
+		<div class="actions">
+			<button type="button" class="btn" id="copy-btn">Copy link</button>
+			<a class="btn btn-secondary" id="open-link" href="https://wa.me/" target="_blank" rel="noopener noreferrer">Open in WhatsApp</a>
+		</div>
+		<p class="status" id="copy-status" role="status" aria-live="polite"></p>
+	</div>
+</ToolPage>
+
+<script>
+	import '../scripts/whatsapp-link-generator';
+</script>

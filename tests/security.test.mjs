@@ -164,6 +164,28 @@ export default async function (t) {
 			await page.selectOption('#accent', 'navy');
 			t.check('cv-builder works under CSP (dynamic colour)', (await page.textContent('#doc')).includes('Test Person'));
 		}],
+		['/whatsapp-link-generator', async (page) => {
+			await page.fill('#phone', '0801 234 5678');
+			await page.fill('#message', 'Hello');
+			await page.waitForFunction(() => document.getElementById('link').value.startsWith('https://wa.me/2348012345678'));
+			await page.click('#copy-btn');
+			await page.waitForFunction(() => document.getElementById('copy-status').textContent.length > 0);
+			t.check('whatsapp-link-generator works under CSP (including Copy)', true);
+		}],
+		['/cgpa-calculator', async (page) => {
+			await page.fill('#courses .entry:nth-child(1) input[type=number]', '3');
+			await page.selectOption('#courses .entry:nth-child(1) select', 'A');
+			await page.waitForFunction(() => /Semester GPA\s*5\.00/.test(document.getElementById('result').textContent));
+			t.check('cgpa-calculator works under CSP', true);
+		}],
+		['/loan-calculator', async (page) => {
+			await page.fill('#amount', '1000000');
+			await page.fill('#rate', '24');
+			await page.fill('#term', '12');
+			await page.click('#schedule-btn');
+			await page.waitForSelector('#schedule tbody tr');
+			t.check('loan-calculator works under CSP (including the schedule)', true);
+		}],
 		['/compress-pdf', async (page) => {
 			const jpg = await makeImage(page, { w: 1600, h: 1200, quality: 0.9, noise: true });
 			const d = await PDFDocument.create();

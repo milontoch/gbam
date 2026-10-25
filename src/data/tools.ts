@@ -2,7 +2,7 @@
 // The home page grid, the menu and (later) the sitemap all read from this list.
 // To add a tool: add an entry here, add src/pages/<slug>.astro and src/scripts/<slug>.ts.
 
-export type Category = 'Image' | 'PDF' | 'Documents';
+export type Category = 'Image' | 'PDF' | 'Documents' | 'Calculators' | 'WhatsApp';
 
 export interface Tool {
 	slug: string; // URL path: /<slug>
@@ -112,6 +112,42 @@ export const tools: Tool[] = [
 		metaTitle: 'Passport Photo Maker – Free & Private | HandyQuill',
 		metaDescription:
 			'Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.',
+	},
+	{
+		slug: 'whatsapp-link-generator',
+		name: 'WhatsApp Link Generator',
+		h1: 'WhatsApp Link Generator (Click to Chat)',
+		summary: 'Make a link that opens a WhatsApp chat, with a message ready to send.',
+		badge: 'WA',
+		category: 'WhatsApp',
+		live: true,
+		metaTitle: 'WhatsApp Link Generator – Click to Chat | HandyQuill',
+		metaDescription:
+			'Make a wa.me link that opens a WhatsApp chat with your number and a ready-typed message. Free, no sign-up, and nothing is sent anywhere.',
+	},
+	{
+		slug: 'cgpa-calculator',
+		name: 'CGPA Calculator',
+		h1: 'CGPA Calculator (5.0 Scale)',
+		summary: 'Work out your semester GPA and your updated CGPA.',
+		badge: 'GPA',
+		category: 'Calculators',
+		live: true,
+		metaTitle: 'CGPA Calculator (5.0 Scale) – Free & Private | HandyQuill',
+		metaDescription:
+			'Add your courses and grades to get your semester GPA, your updated CGPA and your degree class on the 5.0 scale. Free, and nothing is sent anywhere.',
+	},
+	{
+		slug: 'loan-calculator',
+		name: 'Loan Interest Calculator',
+		h1: 'Loan Interest Calculator: Flat vs Reducing Balance',
+		summary: 'See your monthly payment, total interest and the real yearly cost.',
+		badge: 'LN',
+		category: 'Calculators',
+		live: true,
+		metaTitle: 'Loan Interest Calculator – Flat vs Reducing | HandyQuill',
+		metaDescription:
+			'Work out the monthly payment, total interest and true yearly cost of a loan, for flat-rate or reducing-balance interest. Free, and nothing is sent anywhere.',
 	},
 ];
 
