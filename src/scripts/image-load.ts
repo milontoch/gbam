@@ -11,12 +11,19 @@ const isSvg = (f: File) => f.type === 'image/svg+xml' || /\.svgz?$/i.test(f.name
 const HEIC_HELP =
 	'This browser cannot open HEIC photos (the iPhone format). Safari can. Or on the iPhone, go to Settings, Camera, Formats and choose Most Compatible, or share the photo as JPG.';
 
-export async function decodeImage(file: File, maxPixels: number): Promise<ImageBitmap> {
-	if (file.size === 0) throw new Error('This file is empty.');
-	if (file.size > MAX_IMAGE_BYTES) throw new Error('This file is larger than 40 MB.');
-	if (isSvg(file)) throw new Error('SVG files are not supported. Use a photo such as JPG or PNG.');
+// Quick checks that need no decoding. Returns a plain-English problem, or null when the file looks usable.
+export function precheckImage(file: File): string | null {
+	if (file.size === 0) return 'This file is empty.';
+	if (file.size > MAX_IMAGE_BYTES) return 'This file is larger than 40 MB.';
+	if (isSvg(file)) return 'SVG files are not supported. Use a photo such as JPG or PNG.';
 	// Some systems report no type at all (blank), so only reject types that are clearly not images.
-	if (file.type && !file.type.startsWith('image/') && !isHeic(file)) throw new Error('This is not an image file.');
+	if (file.type && !file.type.startsWith('image/') && !isHeic(file)) return 'This is not an image file.';
+	return null;
+}
+
+export async function decodeImage(file: File, maxPixels: number): Promise<ImageBitmap> {
+	const problem = precheckImage(file);
+	if (problem) throw new Error(problem);
 
 	let bitmap: ImageBitmap;
 	try {

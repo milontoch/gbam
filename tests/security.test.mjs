@@ -164,6 +164,14 @@ export default async function (t) {
 			await page.selectOption('#accent', 'navy');
 			t.check('cv-builder works under CSP (dynamic colour)', (await page.textContent('#doc')).includes('Test Person'));
 		}],
+		['/images-to-pdf', async (page) => {
+			const img = await makeImage(page, { w: 800, h: 1100, quality: 0.9 });
+			await page.setInputFiles('#file-input', { name: 'a.jpg', mimeType: 'image/jpeg', buffer: img });
+			await page.waitForSelector('#file-list li');
+			await page.click('#make-btn');
+			await page.waitForSelector('#results a', { timeout: 60000 });
+			t.check('images-to-pdf works under CSP (lazy-loaded library, canvas, download)', true);
+		}],
 		['/whatsapp-link-generator', async (page) => {
 			await page.fill('#phone', '0801 234 5678');
 			await page.fill('#message', 'Hello');

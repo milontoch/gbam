@@ -11,6 +11,7 @@
     "/guides/merge-pdf-files-on-your-phone",
     "/guides/reduce-photo-size-under-100kb",
     "/guides/save-cv-or-invoice-as-pdf-on-phone",
+    "/images-to-pdf",
     "/invoice-generator",
     "/licenses",
     "/loan-calculator",
@@ -34,7 +35,7 @@
         "Organization",
         "WebSite"
       ],
-      "internalLinks": 21
+      "internalLinks": 22
     },
     "/about": {
       "status": 200,
@@ -44,7 +45,7 @@
       "canonicalPath": "/about",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/cgpa-calculator": {
       "status": 200,
@@ -62,7 +63,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/compress-image": {
       "status": 200,
@@ -80,7 +81,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/compress-pdf": {
       "status": 200,
@@ -98,7 +99,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/contact": {
       "status": 200,
@@ -108,7 +109,7 @@
       "canonicalPath": "/contact",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/cv-builder": {
       "status": 200,
@@ -126,7 +127,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/guides": {
       "status": 200,
@@ -136,7 +137,7 @@
       "canonicalPath": "/guides",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 21
+      "internalLinks": 22
     },
     "/guides/merge-pdf-files-on-your-phone": {
       "status": 200,
@@ -152,7 +153,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
     },
     "/guides/reduce-photo-size-under-100kb": {
       "status": 200,
@@ -168,7 +169,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
     },
     "/guides/save-cv-or-invoice-as-pdf-on-phone": {
       "status": 200,
@@ -184,7 +185,25 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
+    },
+    "/images-to-pdf": {
+      "status": 200,
+      "title": "Images to PDF – JPG, PNG to PDF Maker | HandyQuill",
+      "description": "Turn JPG, PNG and other photos into one PDF, in the order you choose. Free, no sign-up, and your pictures never leave your device.",
+      "h1": "Images to PDF: Make a PDF From Photos",
+      "canonicalPath": "/images-to-pdf",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 19
     },
     "/invoice-generator": {
       "status": 200,
@@ -202,7 +221,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/licenses": {
       "status": 200,
@@ -212,7 +231,7 @@
       "canonicalPath": "/licenses",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/loan-calculator": {
       "status": 200,
@@ -230,7 +249,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/merge-pdf": {
       "status": 200,
@@ -248,7 +267,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/passport-photo-maker": {
       "status": 200,
@@ -266,7 +285,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/privacy": {
       "status": 200,
@@ -276,7 +295,7 @@
       "canonicalPath": "/privacy",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/resize-image": {
       "status": 200,
@@ -294,7 +313,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/split-pdf": {
       "status": 200,
@@ -312,7 +331,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/terms": {
       "status": 200,
@@ -322,7 +341,7 @@
       "canonicalPath": "/terms",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 18
+      "internalLinks": 19
     },
     "/whatsapp-link-generator": {
       "status": 200,
@@ -340,7 +359,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 18
+      "internalLinks": 19
     }
   }
 }

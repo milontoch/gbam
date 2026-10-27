@@ -114,6 +114,18 @@ export const tools: Tool[] = [
 			'Crop your photo to passport size and make a print-ready sheet. Free, and your photo never leaves your device.',
 	},
 	{
+		slug: 'images-to-pdf',
+		name: 'Images to PDF',
+		h1: 'Images to PDF: Make a PDF From Photos',
+		summary: 'Turn photos and scans into one PDF, in the order you choose.',
+		badge: 'PDF',
+		category: 'PDF',
+		live: true,
+		metaTitle: 'Images to PDF – JPG, PNG to PDF Maker | HandyQuill',
+		metaDescription:
+			'Turn JPG, PNG and other photos into one PDF, in the order you choose. Free, no sign-up, and your pictures never leave your device.',
+	},
+	{
 		slug: 'whatsapp-link-generator',
 		name: 'WhatsApp Link Generator',
 		h1: 'WhatsApp Link Generator (Click to Chat)',
