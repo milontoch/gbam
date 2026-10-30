@@ -54,7 +54,7 @@ function withOrientation(jpeg, value) {
 }
 
 async function make(page, files, { settings = {}, name } = {}) {
-	if (files) await page.setInputFiles('#file-input', files);
+	if (files) await page.setInputFiles('#file-input', files, { timeout: 120000 });
 	await page.waitForSelector('#file-list li, #status.error', { timeout: 30000 });
 	for (const [id, value] of Object.entries(settings)) await page.selectOption(`#${id}`, value);
 	if (name !== undefined) await page.fill('#pdf-name', name);
@@ -238,7 +238,12 @@ export default async function (t) {
 	// a heavy job
 	{
 		const page = await open(t, '/images-to-pdf');
-		const files = Array.from({ length: 8 }, (_, i) => jpg(`scan${i}.jpg`, noisyA));
+		// Big files are handed over by their place on disk. Sending 44 MB through the test tool's remote-control channel is slow and flaky.
+		const files = Array.from({ length: 8 }, (_, i) => {
+			const file = path.join(os.tmpdir(), `gbam-test-scan${i}.jpg`);
+			fs.writeFileSync(file, noisyA);
+			return file;
+		});
 		const t0 = Date.now();
 		const r = await make(page, files, { settings: { quality: 'balanced' } });
 		t.check('heavy: eight 6-megapixel photos become one PDF', r.out && (await sizes(r.out)).length === 8, r.status);

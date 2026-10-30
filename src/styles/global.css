@@ -908,3 +908,128 @@ progress {
 		min-height: 24.5rem;
 	}
 }
+
+/* Rotate PDF: page pictures and the big preview */
+.preview-panel {
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.75rem;
+	margin: 1rem 0;
+	background: var(--surface);
+}
+
+.preview-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.preview-stage {
+	display: grid;
+	place-items: center;
+	min-height: 18rem; /* room kept so the page does not jump while the picture is drawn */
+	background: #e2e8f0;
+	border-radius: 8px;
+	padding: 0.5rem;
+}
+
+.preview-stage canvas {
+	display: block;
+	max-width: 100%;
+	max-height: 28rem;
+	width: auto;
+	height: auto;
+	background: #fff;
+	box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
+}
+
+.preview-actions {
+	justify-content: center;
+}
+
+.page-grid {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0;
+	display: grid;
+	gap: 0.75rem;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.page-card {
+	border: 2px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.5rem;
+	background: var(--bg);
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.page-card.picked {
+	border-color: var(--brand);
+	background: var(--brand-tint);
+}
+
+.thumb {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	min-height: 11rem; /* fixed room, so thumbnails drawn later do not push the page around */
+	padding: 0.25rem;
+	border: 0;
+	border-radius: 8px;
+	background: #e2e8f0;
+	cursor: zoom-in;
+}
+
+.thumb canvas {
+	display: block;
+	max-width: 100%;
+	max-height: 10.5rem;
+	width: auto;
+	height: auto;
+	background: #fff;
+}
+
+.page-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	align-content: flex-start;
+	justify-content: space-between;
+	gap: 0.25rem;
+	min-height: 4.75rem; /* room for the "Will be turned" label, so buttons in a row stay level */
+}
+
+.page-meta .choice {
+	min-height: 44px;
+}
+
+.rot-badge {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--brand-dark);
+}
+
+.page-card .row-actions {
+	justify-content: stretch;
+}
+
+.page-card .row-actions .btn {
+	flex: 1;
+}
+
+@media (min-width: 40rem) {
+	.page-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 60rem) {
+	.page-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

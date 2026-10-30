@@ -1,0 +1,96 @@
+---
+import ToolPage from '../layouts/ToolPage.astro';
+import FileDropzone from '../components/FileDropzone.astro';
+
+const steps = [
+	'Tap the box and choose your PDF. Small pictures of every page appear. Tap a page to see it bigger.',
+	'Turn a single page with its ↺ (left) or ↻ (right) button. For several pages at once, tick them, then use "Turn right", "Turn left" or "Turn 180°". "Tick wide pages" ticks the pages that lie on their side.',
+	'Check the pictures. When every page stands the right way up, press Save rotated PDF and Download.',
+];
+
+const faq = [
+	{
+		q: 'Is my PDF uploaded anywhere?',
+		a: 'No. The pages are drawn and turned inside your browser, on your own device. Your document is never sent to HandyQuill or anyone else.',
+	},
+	{
+		q: 'Does turning a page make the PDF worse?',
+		a: 'No. Only the "which way up" setting of each page you turned is changed. The text, pictures and quality inside the page are not touched, so searchable text stays searchable and the file is about the same size.',
+	},
+	{
+		q: 'What do left and right mean?',
+		a: '"Right" turns the page a quarter turn clockwise, like turning a steering wheel to the right. "Left" turns it a quarter turn anti-clockwise. If a page lies on its side with the top pointing left, turn it right. If the top points right, turn it left. "180°" fixes upside-down pages.',
+	},
+	{
+		q: 'Can I turn only some pages?',
+		a: 'Yes. Use the buttons on a page to turn just that page, or tick several pages and turn them together. Pages you do not touch stay exactly as they are.',
+	},
+	{
+		q: 'Why is a page small or blurry in the preview?',
+		a: 'The pictures are only previews, made small so that many pages show quickly. The saved PDF keeps the full quality of the original. Tap a page to see a bigger preview.',
+	},
+	{
+		q: 'Why does it say my PDF is password-protected?',
+		a: 'Locked PDFs cannot be opened here. Remove the password using the app you normally use, save a copy, and choose that copy.',
+	},
+	{
+		q: 'Is there a limit?',
+		a: 'PDFs up to 100 MB and up to 300 pages. For a longer PDF, cut it into parts with the Split PDF tool, turn the pages, then join the parts again with the Merge PDF tool.',
+	},
+];
+---
+
+<ToolPage
+	slug="rotate-pdf"
+	intro="See every page, then turn the sideways or upside-down ones until they stand the right way up. Free, with no sign-up."
+	steps={steps}
+	faq={faq}
+>
+	<FileDropzone id="file-input" accept="application/pdf,.pdf" title="Tap to choose a PDF file" />
+
+	<div id="editor" class="hidden">
+		<p class="muted" id="file-info"></p>
+
+		<div class="actions">
+			<button type="button" class="btn btn-secondary btn-small" id="select-all">Tick all</button>
+			<button type="button" class="btn btn-secondary btn-small" id="select-none">Tick none</button>
+			<button type="button" class="btn btn-secondary btn-small" id="select-sideways" disabled>Tick wide pages</button>
+		</div>
+		<p class="muted" id="selection-info" role="status" aria-live="polite">No pages ticked yet.</p>
+
+		<div class="actions">
+			<button type="button" class="btn btn-secondary" id="turn-left" disabled>↺ Turn left</button>
+			<button type="button" class="btn btn-secondary" id="turn-right" disabled>↻ Turn right</button>
+			<button type="button" class="btn btn-secondary" id="turn-180" disabled>Turn 180°</button>
+			<button type="button" class="btn btn-secondary" id="reset-all" disabled>Undo all turns</button>
+		</div>
+
+		<section id="preview-panel" class="preview-panel" aria-label="Page preview">
+			<div class="preview-head">
+				<button type="button" class="btn btn-secondary btn-small" id="preview-prev" aria-label="Previous page">←</button>
+				<strong id="preview-label">Page 1</strong>
+				<button type="button" class="btn btn-secondary btn-small" id="preview-next" aria-label="Next page">→</button>
+			</div>
+			<div class="preview-stage">
+				<canvas id="preview-canvas" aria-label="Large preview of the page"></canvas>
+			</div>
+			<div class="actions preview-actions">
+				<button type="button" class="btn btn-secondary" id="preview-left">↺ Turn this page left</button>
+				<button type="button" class="btn btn-secondary" id="preview-right">↻ Turn this page right</button>
+			</div>
+		</section>
+
+		<ul class="page-grid" id="pages"></ul>
+
+		<div class="actions">
+			<button type="button" class="btn" id="save-btn" disabled>Save rotated PDF</button>
+		</div>
+	</div>
+
+	<p class="status" id="status" role="status" aria-live="polite"></p>
+	<ul class="results" id="results"></ul>
+</ToolPage>
+
+<script>
+	import '../scripts/rotate-pdf';
+</script>

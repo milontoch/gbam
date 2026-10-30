@@ -5,7 +5,7 @@
 //  2. rasterize(): draws every page as a picture at a lower resolution and rebuilds the PDF. Much stronger,
 //     but the text can no longer be selected or searched.
 import { PDFArray, PDFBool, PDFDict, PDFDocument, PDFName, PDFNumber, PDFRawStream } from 'pdf-lib';
-import workerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url';
+import { PdfPasswordError, openPdf } from './pdfjs-loader';
 
 export interface Progress {
 	done: number;
@@ -153,27 +153,10 @@ export async function shrinkImages(
 	return { bytes: out, found: candidates.length, changed };
 }
 
-export class PdfPasswordError extends Error {}
+export { PdfPasswordError };
 
 export async function rasterize(bytes: Uint8Array, level: { dpi: number; quality: number }, ctl: Control): Promise<Uint8Array> {
-	const pdfjs = await import('pdfjs-dist/legacy/build/pdf.min.mjs');
-	pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
-
-	const task = pdfjs.getDocument({
-		data: bytes.slice(), // pdf.js takes ownership of the buffer it is given, so give it a copy
-		wasmUrl: '/pdfjs/wasm/',
-		cMapUrl: '/pdfjs/cmaps/',
-		cMapPacked: true,
-		standardFontDataUrl: '/pdfjs/standard_fonts/',
-		iccUrl: '/pdfjs/iccs/',
-	});
-	let pdf;
-	try {
-		pdf = await task.promise;
-	} catch (err) {
-		if (err instanceof Error && err.name === 'PasswordException') throw new PdfPasswordError('password');
-		throw err;
-	}
+	const { pdf, task } = await openPdf(bytes);
 
 	try {
 		if (pdf.numPages > MAX_RASTER_PAGES) throw new Error(`Maximum compression works up to ${MAX_RASTER_PAGES} pages.`);

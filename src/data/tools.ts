@@ -66,6 +66,18 @@ export const tools: Tool[] = [
 			'Extract pages or split a PDF into separate files in your browser. Free, and your documents never leave your device.',
 	},
 	{
+		slug: 'rotate-pdf',
+		name: 'Rotate PDF Pages',
+		h1: 'Rotate PDF Pages: Fix Sideways Pages',
+		summary: 'Preview every page and turn the sideways or upside-down ones.',
+		badge: 'PDF',
+		category: 'PDF',
+		live: true,
+		metaTitle: 'Rotate PDF Pages – Fix Sideways Pages | HandyQuill',
+		metaDescription:
+			'Preview every page of a PDF and turn the sideways or upside-down ones, without losing quality. Free, no sign-up, and your file never leaves your device.',
+	},
+	{
 		slug: 'compress-pdf',
 		name: 'Compress PDF',
 		h1: 'Compress PDF Online',

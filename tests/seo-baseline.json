@@ -19,6 +19,7 @@
     "/passport-photo-maker",
     "/privacy",
     "/resize-image",
+    "/rotate-pdf",
     "/split-pdf",
     "/terms",
     "/whatsapp-link-generator"
@@ -35,7 +36,7 @@
         "Organization",
         "WebSite"
       ],
-      "internalLinks": 22
+      "internalLinks": 23
     },
     "/about": {
       "status": 200,
@@ -45,7 +46,7 @@
       "canonicalPath": "/about",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/cgpa-calculator": {
       "status": 200,
@@ -63,7 +64,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/compress-image": {
       "status": 200,
@@ -81,7 +82,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
     },
     "/compress-pdf": {
       "status": 200,
@@ -99,7 +100,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/contact": {
       "status": 200,
@@ -109,7 +110,7 @@
       "canonicalPath": "/contact",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/cv-builder": {
       "status": 200,
@@ -127,7 +128,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
     },
     "/guides": {
       "status": 200,
@@ -137,7 +138,7 @@
       "canonicalPath": "/guides",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 22
+      "internalLinks": 23
     },
     "/guides/merge-pdf-files-on-your-phone": {
       "status": 200,
@@ -153,7 +154,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 21
+      "internalLinks": 22
     },
     "/guides/reduce-photo-size-under-100kb": {
       "status": 200,
@@ -169,7 +170,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 21
+      "internalLinks": 22
     },
     "/guides/save-cv-or-invoice-as-pdf-on-phone": {
       "status": 200,
@@ -185,7 +186,7 @@
         "ListItem",
         "Organization"
       ],
-      "internalLinks": 21
+      "internalLinks": 22
     },
     "/images-to-pdf": {
       "status": 200,
@@ -203,7 +204,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/invoice-generator": {
       "status": 200,
@@ -221,7 +222,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/licenses": {
       "status": 200,
@@ -231,7 +232,7 @@
       "canonicalPath": "/licenses",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/loan-calculator": {
       "status": 200,
@@ -249,7 +250,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/merge-pdf": {
       "status": 200,
@@ -267,7 +268,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 20
+      "internalLinks": 21
     },
     "/passport-photo-maker": {
       "status": 200,
@@ -285,7 +286,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/privacy": {
       "status": 200,
@@ -295,7 +296,7 @@
       "canonicalPath": "/privacy",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/resize-image": {
       "status": 200,
@@ -313,7 +314,25 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
+    },
+    "/rotate-pdf": {
+      "status": 200,
+      "title": "Rotate PDF Pages – Fix Sideways Pages | HandyQuill",
+      "description": "Preview every page of a PDF and turn the sideways or upside-down ones, without losing quality. Free, no sign-up, and your file never leaves your device.",
+      "h1": "Rotate PDF Pages: Fix Sideways Pages",
+      "canonicalPath": "/rotate-pdf",
+      "noindex": false,
+      "structuredData": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "ListItem",
+        "Offer",
+        "Question",
+        "WebApplication"
+      ],
+      "internalLinks": 20
     },
     "/split-pdf": {
       "status": 200,
@@ -331,7 +350,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/terms": {
       "status": 200,
@@ -341,7 +360,7 @@
       "canonicalPath": "/terms",
       "noindex": false,
       "structuredData": [],
-      "internalLinks": 19
+      "internalLinks": 20
     },
     "/whatsapp-link-generator": {
       "status": 200,
@@ -359,7 +378,7 @@
         "Question",
         "WebApplication"
       ],
-      "internalLinks": 19
+      "internalLinks": 20
     }
   }
 }

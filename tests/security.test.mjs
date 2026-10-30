@@ -164,6 +164,20 @@ export default async function (t) {
 			await page.selectOption('#accent', 'navy');
 			t.check('cv-builder works under CSP (dynamic colour)', (await page.textContent('#doc')).includes('Test Person'));
 		}],
+		['/rotate-pdf', async (page) => {
+			const { PDFDocument } = await import('pdf-lib');
+			const d = await PDFDocument.create();
+			d.addPage([400, 300]);
+			d.addPage([300, 400]);
+			await page.setInputFiles('#file-input', pdf('two.pdf', Buffer.from(await d.save())));
+			await page.waitForSelector('#editor:not(.hidden)'); // loads the pdf.js worker and draws the previews
+			await page.waitForFunction(() => !document.getElementById('select-sideways').disabled);
+			await page.click('#select-sideways');
+			await page.click('#turn-right');
+			await page.click('#save-btn');
+			await page.waitForSelector('#results a', { timeout: 60000 });
+			t.check('rotate-pdf works under CSP (pdf.js previews, turning, saving)', true);
+		}],
 		['/images-to-pdf', async (page) => {
 			const img = await makeImage(page, { w: 800, h: 1100, quality: 0.9 });
 			await page.setInputFiles('#file-input', { name: 'a.jpg', mimeType: 'image/jpeg', buffer: img });
