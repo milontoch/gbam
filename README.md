@@ -2,7 +2,7 @@
 
 Free browser-based tools for everyday users. Files are processed on the user's device and never uploaded.
 
-Built with [Astro](https://astro.build). Plan: [docs/SCOPE.md](docs/SCOPE.md).
+Built with [Astro](https://astro.build). **Start here: [docs/HANDBOOK.md](docs/HANDBOOK.md)** (how to run, change and grow the site, and how to move to a domain). The original plan is in [docs/SCOPE.md](docs/SCOPE.md).
 
 ## Commands
 

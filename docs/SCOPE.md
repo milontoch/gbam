@@ -1,5 +1,7 @@
 # HandyQuill: scope, site map, structure
 
+> This is the **original day-one plan** and is out of date. The project grew past it. See [HANDBOOK.md](HANDBOOK.md) for how things are now.
+
 ## Launch tools (8 pages from 5 families)
 
 | # | Page URL | Tool | Library | Risk |
