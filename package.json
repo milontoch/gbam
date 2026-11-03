@@ -19,7 +19,7 @@
   "dependencies": {
     "astro": "^7.3.5",
     "fflate": "^0.8.3",
-    "onnxruntime-web": "^1.30.0",
+    "onnxruntime-web": "^1.31.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^6.4.299"
   },
