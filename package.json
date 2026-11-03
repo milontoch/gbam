@@ -17,7 +17,7 @@
     "predev": "node scripts/copy-pdfjs-assets.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.5",
+    "astro": "^7.4.4",
     "fflate": "^0.8.3",
     "onnxruntime-web": "^1.30.0",
     "pdf-lib": "^1.17.1",
