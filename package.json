@@ -21,7 +21,7 @@
     "fflate": "^0.8.3",
     "onnxruntime-web": "^1.30.0",
     "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^6.4.299"
+    "pdfjs-dist": "^6.5.438"
   },
   "allowScripts": {
     "esbuild": true
